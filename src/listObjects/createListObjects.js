@@ -1,0 +1,8 @@
+class List {
+
+    #name
+    
+    constructor() {
+        
+    }
+}
