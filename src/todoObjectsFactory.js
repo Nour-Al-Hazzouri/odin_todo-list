@@ -1,12 +1,14 @@
 // Create TODO items per required fields.
 class todoObjectsFactory {
 
+    #UUID
     #title;
     #description
     #dueDate;
     #priority;
 
     constructor(title, description, dueDate, priority) {
+        this.#UUID = crypto.randomUUID();
         this.#title = title;
         this.#description = description;
         this.#dueDate = dueDate;
@@ -36,6 +38,9 @@ class todoObjectsFactory {
     }
     get Priority() {
         return this.#priority;
+    }
+    get UUID() {
+        return this.#UUID;
     }
 
 }
