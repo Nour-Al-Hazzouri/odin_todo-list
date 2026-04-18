@@ -1,15 +1,4 @@
 {
-  "name": "webpack-merge",
-  "version": "1.0.0",
-  "description": "Webpack merge's config as a template for faster setups",
-  "homepage": "https://github.com/Nour-Al-Hazzouri/webpack-merge#readme",
-  "bugs": {
-    "url": "https://github.com/Nour-Al-Hazzouri/webpack-merge/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Nour-Al-Hazzouri/webpack-merge.git"
-  },
   "license": "ISC",
   "author": "Nour Al Hazzouri",
   "type": "module",
