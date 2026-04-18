@@ -1,15 +1,7 @@
 import './styles.css';
-import todoObjectsFactory from './todoObjectsFactory.js';
+import { createTodoObject } from './createTodoObject.js';
+import { getTodoObjects } from './todoObjectsStorage.js';
 
-const todoItem = new todoObjectsFactory("titleOne", "This is the description of ItemOne", "15/10/2026", "High");
-document.addEventListener("DOMContentLoaded", alertMe);
-
-function alertMe() {
-    alert(todoItem.Title);
-    changeDetails()
-};
-
-function changeDetails() {
-    todoItem.setTitle = "Edited Title"
-    alert(todoItem.Title);
-}
+createTodoObject("Task 1", "Task 1 Description", "11/11/2026", "High");
+const todoObjects = getTodoObjects();
+alert(todoObjects[0].Title);
