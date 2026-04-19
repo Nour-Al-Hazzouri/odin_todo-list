@@ -1,8 +1,0 @@
-class List {
-
-    #name
-    
-    constructor() {
-        
-    }
-}
