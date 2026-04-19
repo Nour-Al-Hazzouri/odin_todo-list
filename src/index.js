@@ -1,7 +1,8 @@
 import './styles.css';
-import { createTodoObject } from './todoObjects/createTodoObject.js';
-import { getTodoObjects } from './todoObjects/todoObjectsStorage.js';
+import { createTodoObject, createListObject } from './objectsComponents/createObjects.js';
+import { getTodoObjects, getListObjects } from './objectsComponents/centralObjectsStorage.js';
+const todoItem = createTodoObject("Task 1", "Description", "11/11/2025", "High");
+const listItem = createListObject("Default", getTodoObjects());
 
-createTodoObject("Task 1", "Task 1 Description", "11/11/2026", "High");
-const todoObjects = getTodoObjects();
-alert(todoObjects[0].UUID);
+console.log(getTodoObjects());
+console.log(getListObjects());
