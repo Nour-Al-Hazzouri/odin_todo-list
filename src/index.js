@@ -1,8 +1,11 @@
 import './styles.css';
 import { createTodoObject, createListObject } from './objectsComponents/createObjects.js';
 import { getTodoObjects, getListObjects } from './objectsComponents/centralObjectsStorage.js';
-const todoItem = createTodoObject("Task 1", "Description", "11/11/2025", "High");
-const listItem = createListObject("Default", getTodoObjects());
+import checkObjectId from './checkers/checkObjectId.js';
 
-console.log(getTodoObjects());
-console.log(getListObjects());
+const listItem = createListObject("List 1", getTodoObjects());
+const allTodoObjects = getTodoObjects();
+const allListObjects = getListObjects();
+
+console.log(allListObjects[1]);
+console.log(checkObjectId(allListObjects[1]));
