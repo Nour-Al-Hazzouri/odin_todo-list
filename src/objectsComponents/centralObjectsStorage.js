@@ -1,13 +1,22 @@
-import todoObjectsFactory from './todoObjectsFactory.js'
-import listObjectsFactory from './listObjectsFactory.js';
+import todoObjectsFactory from '../objectsFactories/todoObjectsFactory.js'
+import listObjectsFactory from '../objectsFactories/listObjectsFactory.js';
+import checkInstanceOf from '../checkers/checkInstanceOfObject.js';
 
 const todoObjectsArray = [];
 const listObjectsArray = [];
 
+// Default list to contain all TODO items
+listObjectsArray[0] = {
+    id: crypto.randomUUID(),
+    name: "Default",
+    items: todoObjectsArray
+};
+
 function saveObject(passedObject) {
-    if (passedObject instanceof todoObjectsFactory)
+    if (checkInstanceOf(passedObject) === 'todo') {
         todoObjectsArray.push(passedObject);
-    else if (passedObject instanceof listObjectsFactory) {
+    }
+    else if (checkInstanceOf(passedObject) === 'list') {
         listObjectsArray.push(passedObject);
     }
 };
