@@ -3,24 +3,24 @@ import checkInstanceOf from "../checkers/checkInstanceOfObject.js";
 import checkObjectOccurrence from "../checkers/checkObjectOccurrence.js";
 import { saveObject } from "./centralObjectsStorage.js";
 
-function appendTodoToList(list, todoItem) {
-  if (!checkInstanceConditionOf(list, todoItem)) {
+function appendTodoToList(list, todoObject) {
+  if (!checkInstanceConditionOf(list, todoObject)) {
     throw Error("Can't append to list. Check list and object.");
   } else {
-    if (!checkObjectOccurrence(list, todoItem)) {
-      list.appendTodoItem(todoItem);
+    if (!checkObjectOccurrence(list, todoObject)) {
+      list.appendTodoItem(todoObject);
     } else {
       throw Error("Item already in list.");
     }
   }
 }
 
-function removeFromList(list, todoItem) {
-  if (!checkInstanceConditionOf(list, todoItem)) {
+function removeFromList(list, todoObject) {
+  if (!checkInstanceConditionOf(list, todoObject)) {
     throw Error("Can't remove from list. Check list and object.");
   } else {
-    if (checkObjectOccurrence(list, todoItem)) {
-      list.removeTodoItem(todoItem);
+    if (checkObjectOccurrence(list, todoObject)) {
+      list.removeTodoItem(todoObject);
     } else {
       throw Error("Item not in list.");
     }

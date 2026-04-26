@@ -29,7 +29,7 @@ class listObjectsFactory {
     this.#items.push(passedTodoItem);
   }
   removeTodoItem(passedTodoItem) {
-    this.#items.splice(passedTodoItem);
+    this.#items.splice(this.#items.indexOf(passedTodoItem), 1);
   }
 }
 

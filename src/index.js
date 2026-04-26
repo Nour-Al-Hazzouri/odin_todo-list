@@ -6,6 +6,7 @@ import {
 import {
   getTodoObjects,
   getListObjects,
+  deleteObject,
 } from "./objectsComponents/centralObjectsStorage.js";
 import checkObjectId from "./checkers/checkObjectId.js";
 import listObjectsFactory from "./objectsFactories/listObjectsFactory.js";
@@ -14,21 +15,20 @@ import checkObjectOccurrence from "./checkers/checkObjectOccurrence.js";
 import {
   appendTodoToList,
   removeFromList,
-} from "./objectsComponents/listsManipulation.js";
+} from "./objectsComponents/objectsManipulation.js";
 
-const todoItem = createTodoObject(
-  `Item 1`,
-  `Description 1`,
-  "11/11/2026",
-  "High",
-);
-const listItem = createListObject("List 1");
+const todoItem = [];
+for (let i = 1; i < 10; i++) {
+  todoItem[i] = createTodoObject(
+    `Item ${i}`,
+    `Description ${i}`,
+    "11/11/2026",
+    "High",
+  );
+}
+
 const allListItems = getListObjects();
+const allTodoObjects = getTodoObjects();
 
-console.log(checkObjectOccurrence(listItem, todoItem));
-appendTodoToList(listItem, todoItem);
-console.log(checkObjectOccurrence(listItem, todoItem));
-removeFromList(listItem, todoItem);
-console.log(checkObjectOccurrence(listItem, todoItem));
-removeFromList(listItem, todoItem);
-console.log(checkObjectOccurrence(listItem, todoItem));
+console.log(allListItems);
+deleteObject(allTodoObjects[5]);
