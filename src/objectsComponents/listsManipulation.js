@@ -1,17 +1,30 @@
-function appendToList(list, todoItem) {
-    if (!list.includes(todoItem)) {
-        list.push(todoItem);
-    } else {
-        throw Error("Already Present");
-    }
-};
+import checkInstanceConditionOf from "../checkers/checkInstanceCondition.js";
+import checkInstanceOf from "../checkers/checkInstanceOfObject.js";
+import checkObjectOccurrence from "../checkers/checkObjectOccurrence.js";
+import { saveObject } from "./centralObjectsStorage.js";
 
-function removeFromList(list, item) {
-    if (list.includes(item)) {
-        list.splice(item, 1);
+function appendTodoToList(list, todoItem) {
+  if (!checkInstanceConditionOf(list, todoItem)) {
+    throw Error("Can't append to list. Check list and object.");
+  } else {
+    if (!checkObjectOccurrence(list, todoItem)) {
+      list.appendTodoItem(todoItem);
     } else {
-        throw Error("Not Present");
+      throw Error("Item already in list.");
     }
+  }
 }
 
-export { appendToList, removeFromList };
+function removeFromList(list, todoItem) {
+  if (!checkInstanceConditionOf(list, todoItem)) {
+    throw Error("Can't remove from list. Check list and object.");
+  } else {
+    if (checkObjectOccurrence(list, todoItem)) {
+      list.removeTodoItem(todoItem);
+    } else {
+      throw Error("Item not in list.");
+    }
+  }
+}
+
+export { appendTodoToList, removeFromList };

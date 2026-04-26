@@ -1,30 +1,36 @@
 class listObjectsFactory {
+  #id;
+  #name;
+  #items = new Array();
 
-    #id
-    #name;
-    #items;
+  constructor(name) {
+    this.#id = crypto.randomUUID();
+    this.#name = name;
+  }
 
-    constructor(name, items) {
-        this.#id = crypto.randomUUID();
-        this.#name = name;
-        this.#items = items;
+  set setName(name) {
+    if (this.#name === "Default") {
+      throw Error("'Default' list is not editable.");
+    } else {
+      this.#name = name;
     }
+  }
+  get Name() {
+    return this.#name;
+  }
+  get Items() {
+    return this.#items;
+  }
+  get id() {
+    return this.#id;
+  }
 
-    set setName(name) {
-        this.#name = name;
-    }
-    get Name() {
-        return this.#name
-    }
-    set setItems(listArray) {
-        this.#items = listArray;
-    }
-    get Items() {
-        return this.#items;
-    }
-    get UUID() {
-        return this.#id;
-    }
+  appendTodoItem(passedTodoItem) {
+    this.#items.push(passedTodoItem);
+  }
+  removeTodoItem(passedTodoItem) {
+    this.#items.splice(passedTodoItem);
+  }
 }
 
 export default listObjectsFactory;
