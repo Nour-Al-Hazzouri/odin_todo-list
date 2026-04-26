@@ -44,18 +44,15 @@
 
 # Walkthrough
 
-## Objects Factories - Classes
-
-- `todoObjectsFactory.js`: Class to create TODO items with the required fields.
-- `listObjectsFactory.js`: Class to create List items with the required fields
-
-## Objects Components - Logic
-
-- `centralObjectsStorage.js`: A central storage that saves all info about todo and list objects, with the ability to return arrays used to save each object instance.
-    > `Default` list is manually created and assigned the `listObjectsArray` to show all created TODO items.
-- `createObjects.js`: Responsible for calling the `saveObject()` function to either create a TODO object, or a List object.
-
-## Checkers - Conditions
-
-- `checkInstanceOfObject.js`: Checks if the `passedObject` is a TODO item or a List item.
-- `checkObjectId.js`: Returns the ID of passed object, by using `checkInstanceOfObject.js` and comparing UUIDs in the appropriate array.
+## Functionality
+### TODO Objects
+**Each TODO object must:**
+  - Store _at least_ the minimal required information
+  - Be inside the `default` list
+  - be capable of being added or removed from any list (excluding `default` which is the main view)
+  - Be editable in all fields except `id`, and deletable
+### List Objects
+**Each List object must:**
+  - Store _at least_ the minimal required information
+  - be capable of being deleted
+  - Be editable in name and contained items (except for `default`, and `id` for any list item)
