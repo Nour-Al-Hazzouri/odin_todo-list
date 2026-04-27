@@ -16,19 +16,20 @@ import {
   appendTodoToList,
   removeFromList,
 } from "./objectsComponents/objectsManipulation.js";
+import { add } from 'date-fns';
+
 
 const todoItem = [];
-for (let i = 1; i < 10; i++) {
+for (let i = 0; i < 10; i++) {
   todoItem[i] = createTodoObject(
     `Item ${i}`,
     `Description ${i}`,
-    "11/11/2026",
+    "2026",
     "High",
   );
 }
-
+const listItem = createListObject("List1");
 const allListItems = getListObjects();
 const allTodoObjects = getTodoObjects();
 
-console.log(allListItems);
-deleteObject(allTodoObjects[5]);
+console.log(todoItem);
