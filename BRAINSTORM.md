@@ -43,8 +43,7 @@
   - **Dependency Inversion:** Is this module hard-coded to a specific dependency ?
 
 # Walkthrough
-
-## Functionality
+## Logic
 ### TODO Objects
 **Each TODO object must:**
   - Store _at least_ the minimal required information
@@ -56,3 +55,15 @@
   - Store _at least_ the minimal required information
   - be capable of being deleted
   - Be editable in name and contained items (except for `default`, and `id` for any list item)
+## UI & DOM
+### Interface
+- **Sidebar** should at least have:
+  - `default list`
+  - User-made `lists`
+  - Ability to close & re-open
+  - Create new `TODO` and `list` objects
+  - Have an options dropdown for each `list`
+- **Content Area:** should at least have:
+  - Selected `list`'s items
+  - Each `TODO`'s information fields
+  - Options to change `TODO`'s list, delete it, or edit its information
