@@ -2,12 +2,13 @@ import { saveObject } from "./centralObjectsStorage.js";
 import todoObjectsFactory from "../objectsFactories/todoObjectsFactory.js";
 import listObjectsFactory from "../objectsFactories/listObjectsFactory.js";
 
-function createTodoObject(title, description, dueDate, priority) {
+function createTodoObject(title, description, dueDate, priority, notes) {
   const todoItem = new todoObjectsFactory(
     title,
     description,
     dueDate,
     priority,
+    notes
   );
   saveObject(todoItem);
   return todoItem;
