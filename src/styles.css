@@ -2,6 +2,7 @@
   --full: 100%;
   --aside-padding: 0.5em 0;
   --sidebar-button-margin: 0.1rem 0 0.1rem 0.5rem;
+  --aside-border: 1.1px solid #000;
 }
 
 html,
@@ -14,15 +15,15 @@ body {
   flex-direction: row;
 }
 
-aside {
+.aside-expanded {
   display: grid;
   grid-template-rows: 0.1fr 3fr 3fr 0.1fr;
   width: 20%;
   height: var(--full);
-  border-right: 1.1px solid #000;
+  border-right: var(--aside-border);
 }
 
-aside > section {
+.aside-expanded > section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,17 +33,17 @@ aside > section {
   padding: var(--aside-padding);
 }
 
-aside > section:nth-child(1) {
+.aside-expanded > section:nth-child(1) {
   max-width: 100%;
   align-items: flex-start;
 }
 
-aside > section:nth-child(1) button {
+.aside-expanded > section:nth-child(1) button {
   margin: var(--sidebar-button-margin);
   align-items: flex-start;
 }
 
-aside > section > div {
+.aside-expanded > section > div {
   display: flex;
   flex-direction: column;
   width: 90%;
@@ -50,6 +51,12 @@ aside > section > div {
   max-height: 240px;
   background-color: antiquewhite;
   overflow-y: scroll;
+}
+
+.aside-collapsed {
+  height: 100%;
+  width: 60px;
+  border-right: var(--aside-border);
 }
 
 .display-none {
