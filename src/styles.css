@@ -1,3 +1,9 @@
+:root {
+  --full: 100%;
+  --aside-padding: 0.5em 0;
+  --sidebar-button-margin: 0.1rem 0 0.1rem 0.5rem;
+}
+
 html,
 body {
   margin: 0;
@@ -9,34 +15,50 @@ body {
 }
 
 aside {
+  display: grid;
+  grid-template-rows: 0.1fr 3fr 3fr 0.1fr;
+  width: 20%;
+  height: var(--full);
+  border-right: 1.1px solid #000;
+}
+
+aside > section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 20%;
-  padding: 0 0.4rem 0 0.4rem;
-  min-height: 100%;
-  border-right: 1px solid #000;
+  justify-content: flex-start;
+  width: 100%;
+  border-bottom: #000 1px solid;
+  padding: var(--aside-padding);
 }
 
 aside > section:nth-child(1) {
+  max-width: 100%;
+  align-items: flex-start;
+}
+
+aside > section:nth-child(1) button {
+  margin: var(--sidebar-button-margin);
+  align-items: flex-start;
+}
+
+aside > section > div {
   display: flex;
-  width: 100%;
-  padding: .5em .4em 0.3em;
-  justify-content: flex-end;
-  align-items: center;
-  border-bottom: #000 1px solid;
+  flex-direction: column;
+  width: 90%;
+  min-height: fit-content;
+  max-height: 240px;
+  background-color: antiquewhite;
+  overflow-y: scroll;
 }
 
 .display-none {
   display: none;
 }
 
-.expand-sidebar {
-  border-radius: 9999px;
-  font-size: 1.2rem;
-  padding-bottom: .5rem;
+.expand-button {
   position: fixed;
   left: 0;
-  top: 0;
-  margin: .4em 0 0 .4em;
+  top: 10px;
+  margin: var(--sidebar-button-margin);
 }
