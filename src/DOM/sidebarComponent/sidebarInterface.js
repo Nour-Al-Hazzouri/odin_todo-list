@@ -7,7 +7,7 @@ import {
   sidebarSections,
   sidebarh2,
   sidebarDivs,
-} from "../DOMElements.js";
+} from "./sidebarElements.js";
 import { collapseSidebar, expandSidebar } from "../sidebarComponent/sidebarBehavior.js";
 import {
   appendSectionOne,
