@@ -47,10 +47,20 @@ body {
   display: flex;
   flex-direction: column;
   width: 90%;
-  min-height: fit-content;
+  height: fit-content;
+  padding: .3rem 0;
   max-height: 240px;
-  background-color: antiquewhite;
   overflow-y: scroll;
+}
+
+.aside-expanded div > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: fit-content;
+  padding: 0.2rem .5rem;
+  margin: .1rem 0;
+  background-color: #dad3d3;
 }
 
 .aside-collapsed {

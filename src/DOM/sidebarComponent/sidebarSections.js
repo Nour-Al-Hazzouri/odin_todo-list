@@ -5,12 +5,16 @@ import {
   sidebarh2,
   sidebarDivs,
   aside,
-} from "../DOMElements.js";
+} from "./sidebarElements.js";
 
 import { collapseSidebar } from "./sidebarBehavior.js";
 import { getListObjects } from "../../objectsComponents/centralObjectsStorage.js";
+import { appendListItems } from "./sidebarContent.js";
+import elementsCreate from "../elementsCreator.js";
 
 const allListObjects = getListObjects();
+
+const sidebarListsDivs = elementsCreate('div', allListObjects.length);
 
 function appendSectionOne() {
   aside.append(sidebarSections[0]);
@@ -24,15 +28,13 @@ function appendSectionTwo() {
   sidebarSections[1].append(sidebarh2[0]);
   sidebarh2[0].textContent = "Your Lists";
   sidebarSections[1].append(sidebarDivs[0]);
-  sidebarDivs[0].append(allListObjects[0].Name, allListObjects[1].Name);
 }
 
 function appendSectionThree() {
   aside.append(sidebarSections[2]);
   sidebarSections[2].append(sidebarh2[1]);
-  sidebarh2[1].textContent = "Your Lists";
+  sidebarh2[1].textContent = "Your Tasks";
   sidebarSections[2].append(sidebarDivs[1]);
-  sidebarDivs[1].append(allListObjects[0].Name, allListObjects[1].Name);
 }
 
 function appendSectionFour() {

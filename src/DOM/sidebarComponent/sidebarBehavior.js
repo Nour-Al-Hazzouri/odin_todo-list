@@ -5,7 +5,7 @@ import {
   sidebarh2,
   aside,
   sidebarDivs,
-} from "../DOMElements.js";
+} from "./sidebarElements.js";
 import { getListObjects } from "../../objectsComponents/centralObjectsStorage.js";
 
 const allListObjects = getListObjects();

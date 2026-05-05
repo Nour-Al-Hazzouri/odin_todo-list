@@ -1,4 +1,4 @@
-import elementsCreate from "./elementsCreator.js";
+import elementsCreate from "../elementsCreator.js";
 
 const body = document.querySelector("body");
 const sidebarSections = elementsCreate("section", 4);
