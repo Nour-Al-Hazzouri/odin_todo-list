@@ -1,14 +1,5 @@
-import { getListObjects } from "../../objectsComponents/centralObjectsStorage.js";
-import elementsCreate from "../elementsCreator.js";
-import {
-  body,
-  aside,
-  sidebarButtons,
-  sidebarSections,
-  sidebarh2,
-  sidebarDivs,
-} from "./sidebarElements.js";
-import { collapseSidebar, expandSidebar } from "../sidebarComponent/sidebarBehavior.js";
+import { expandSidebar } from "../sidebarComponent/sidebarBehavior.js";
+
 import {
   appendSectionOne,
   appendSectionTwo,
