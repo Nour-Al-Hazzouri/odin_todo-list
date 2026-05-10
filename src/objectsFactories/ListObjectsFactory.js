@@ -1,4 +1,4 @@
-class listObjectsFactory {
+class ListObjectsFactory {
   #id;
   #name;
   #items = new Array();
@@ -35,4 +35,4 @@ class listObjectsFactory {
   }
 }
 
-export default listObjectsFactory;
+export default ListObjectsFactory;

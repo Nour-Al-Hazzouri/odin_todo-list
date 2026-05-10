@@ -1,21 +1,27 @@
 import { saveObject } from "./centralObjectsStorage.js";
-import todoObjectsFactory from "../objectsFactories/todoObjectsFactory.js";
-import listObjectsFactory from "../objectsFactories/listObjectsFactory.js";
+import TodoObjectsFactory from "../objectsFactories/TodoObjectsFactory.js";
+import ListObjectsFactory from "../objectsFactories/ListObjectsFactory.js";
 
-function createTodoObject(title, description, dueDate, priority, notes) {
-  const todoItem = new todoObjectsFactory(
+function createTodoObject(
+  title,
+  description = "empty",
+  dueDate,
+  priority,
+  notes = "empty",
+) {
+  const todoItem = new TodoObjectsFactory(
     title,
     description,
     dueDate,
     priority,
-    notes
+    notes,
   );
   saveObject(todoItem);
   return todoItem;
 }
 
 function createListObject(name) {
-  const listItem = new listObjectsFactory(name);
+  const listItem = new ListObjectsFactory(name);
   saveObject(listItem);
   return listItem;
 }

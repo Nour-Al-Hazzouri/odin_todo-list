@@ -1,5 +1,5 @@
 // Create TODO items per required fields.
-class todoObjectsFactory {
+class TodoObjectsFactory {
   #id;
   #title;
   #description;
@@ -51,4 +51,4 @@ class todoObjectsFactory {
   }
 }
 
-export default todoObjectsFactory;
+export default TodoObjectsFactory;

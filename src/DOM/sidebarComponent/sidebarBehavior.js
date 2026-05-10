@@ -7,7 +7,6 @@ import {
 
 import { body, aside, main } from "../../universalQueries.js";
 import elementsCreate from "../elementsCreator.js";
-import { taskForm } from "../taskCreatorComponent/createTaskPage.js";
 
 function collapseSidebar() {
   aside.classList.remove("aside-expanded");
@@ -37,8 +36,4 @@ function expandSidebar() {
   sidebarButtons[0].addEventListener("click", collapseSidebar);
 }
 
-function appendCreateTaskPage() {
-  taskForm();
-}
-
-export { collapseSidebar, expandSidebar, appendCreateTaskPage };
+export { collapseSidebar, expandSidebar };

@@ -1,5 +1,6 @@
 import checkInstanceConditionOf from "./checkInstanceCondition.js";
 
+// Check if a TODO object is inside a List
 function checkObjectOccurrence(list, todoItem) {
   if (!checkInstanceConditionOf(list, todoItem)) {
     throw Error("Can't check object occurrence");

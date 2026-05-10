@@ -1,16 +1,18 @@
-import todoObjectsFactory from "../objectsFactories/todoObjectsFactory.js";
-import listObjectsFactory from "../objectsFactories/listObjectsFactory.js";
+import TodoObjectsFactory from "../objectsFactories/TodoObjectsFactory.js";
+import ListObjectsFactory from "../objectsFactories/ListObjectsFactory.js";
 import checkInstanceOf from "../checkers/checkInstanceOfObject.js";
 
 const todoObjectsArray = [];
 const listObjectsArray = [];
 
-// Default list to contain all TODO items
-listObjectsArray[0] = new listObjectsFactory("Default");
+// Default list to contain all TODO items - MANDATORY
+listObjectsArray[0] = new ListObjectsFactory("Default");
 
+// Push object based on type
 function saveObject(passedObject) {
   if (checkInstanceOf(passedObject) === "todo") {
     todoObjectsArray.push(passedObject);
+    // Default must have all TODO Items
     listObjectsArray[0].appendTodoItem(passedObject);
   } else if (checkInstanceOf(passedObject) === "list") {
     listObjectsArray.push(passedObject);
@@ -19,9 +21,11 @@ function saveObject(passedObject) {
   }
 }
 
+// Delete object based on type
 function deleteObject(passedObject) {
   if (checkInstanceOf(passedObject) === "todo") {
     todoObjectsArray.splice(todoObjectsArray.indexOf(passedObject), 1);
+    // Default must not have any deleted TODOs
     listObjectsArray[0].removeTodoItem(passedObject);
   } else if (
     checkInstanceOf(passedObject) === "list" &&
