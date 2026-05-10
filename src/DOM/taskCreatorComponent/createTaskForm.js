@@ -4,26 +4,31 @@ import {
   mainLabel,
   mainOptions,
 } from "./createTaskElements.js";
-import setLabelAttributes from "./setLabelAttribute.js";
+import { multiToggleAttribute, setLabelAttributes } from "./toggleAttribute.js";
 import { main } from "../../universalQueries.js";
+import { taskDialog } from "./createTaskDialog.js";
 
 const todoForm = document.createElement("form");
-const todoSubmit = document.createElement("button");
 const todoSelect = document.createElement("select");
+const submitForm = document.createElement("button");
+const clearForm = document.createElement("button");
 
-function appendCreateTaskForm() {
+function createTaskForm() {
+  todoForm.setAttribute("method", "dialog");
+
   // Main labels
   setLabelAttributes(mainLabel[0], "Title", "title");
   setLabelAttributes(mainLabel[1], "Description", "description");
   setLabelAttributes(mainLabel[2], "Notes", "notes");
   setLabelAttributes(mainLabel[3], "Due Date", "due-date");
   setLabelAttributes(mainLabel[4], "Priority", "priority");
+
   // 3 repeated input types
   for (let i = 0; i < 3; i++) {
     mainInput[i].setAttribute("type", "text");
-    todoForm.append(mainLabel[i]);
-    todoForm.append(mainInput[i]);
+    todoForm.append(mainLabel[i], mainInput[i]);
   }
+
   // Date input type
   mainInput[3].setAttribute("type", "date");
   todoForm.append(mainLabel[3], mainInput[3]);
@@ -47,14 +52,28 @@ function appendCreateTaskForm() {
   mainInput[1].setAttribute("id", "description");
   mainInput[2].setAttribute("id", "notes");
   mainInput[3].setAttribute("id", "due-date");
+  for (let i = 0; i < 4; i++) {
+    if (!(i === 1) && !(i === 2)) {
+      multiToggleAttribute(mainInput[i], "required");
+    }
+  }
 
-  // Submit button
-  todoSubmit.textContent = "Create Task";
-  todoSubmit.setAttribute("type", "submit");
-  todoSubmit.setAttribute("form", "task-form");
-  
+  // Submit button and form actions
+  submitForm.textContent = "Create Task";
+  submitForm.setAttribute("type", "submit");
+  todoForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+  });
+
+  // Clear Button
+  clearForm.textContent = "Clear";
+  clearForm.setAttribute("type", "reset");
+
+  // Set ids
   todoForm.id = "task-form";
-  main.append(todoForm, todoSubmit);
+
+  todoForm.append(submitForm, clearForm);
+  return todoForm;
 }
 
-export default appendCreateTaskForm;
+export default createTaskForm;

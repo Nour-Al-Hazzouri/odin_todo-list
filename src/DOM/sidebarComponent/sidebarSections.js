@@ -6,6 +6,11 @@ import {
 } from "./sidebarElements.js";
 import { body, aside } from "../../universalQueries.js";
 import { appendCreateTaskPage } from "./sidebarBehavior.js";
+import {
+  appendTaskDialog,
+  manipulateTaskDialog,
+  manipulateTaskModal,
+} from "../taskCreatorComponent/createTaskDialog.js";
 
 function appendSectionOne() {
   aside.append(sidebarSections[0]);
@@ -31,13 +36,14 @@ function appendSectionThree() {
 
 function appendSectionFour() {
   aside.append(sidebarSections[3]);
-  sidebarSections[3].append(sidebarButtons[2]);
-  sidebarSections[3].append(sidebarButtons[3]);
+  sidebarSections[3].append(sidebarButtons[2], sidebarButtons[3]);
   sidebarButtons[2].textContent = "Create List";
   sidebarButtons[2].classList.add("create-list");
   sidebarButtons[3].textContent = "Create Task";
   sidebarButtons[3].classList.add("create-task");
-  sidebarButtons[3].addEventListener("click", appendCreateTaskPage);
+  sidebarButtons[3].id = "task-modal";
+  appendTaskDialog();
+  sidebarButtons[3].addEventListener("click", manipulateTaskDialog);
 }
 
 export {

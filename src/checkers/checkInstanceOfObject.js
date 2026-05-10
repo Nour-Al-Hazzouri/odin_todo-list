@@ -1,9 +1,9 @@
-import todoObjectsFactory from "../objectsFactories/todoObjectsFactory.js";
-import listObjectsFactory from "../objectsFactories/listObjectsFactory.js";
+import TodoObjectsFactory from "../objectsFactories/TodoObjectsFactory.js";
+import ListObjectsFactory from "../objectsFactories/ListObjectsFactory.js";
 
 function checkInstanceOf(passedObject) {
-  if (passedObject instanceof todoObjectsFactory) return "todo";
-  else if (passedObject instanceof listObjectsFactory) return "list";
+  if (passedObject instanceof TodoObjectsFactory) return "todo";
+  else if (passedObject instanceof ListObjectsFactory) return "list";
   else throw Error("Instance not recognizable.");
 }
 

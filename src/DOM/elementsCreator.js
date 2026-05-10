@@ -1,3 +1,4 @@
+// Create same element multiple times with a loop.
 function elementsCreate(element, number) {
   const createdElement = new Array();
   if (!element || !number) {
