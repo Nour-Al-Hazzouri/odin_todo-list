@@ -6,9 +6,8 @@ const closeTaskDialog = document.createElement("button");
 
 function appendTaskDialog() {
   const taskForm = createTaskForm();
-  const taskModal = document.querySelector("#task-modal");
   closeTaskDialog.textContent = "X";
-  closeTaskDialog.id = "close-task";
+  closeTaskDialog.classList.add("close-btn");
   taskDialog.append(closeTaskDialog, taskForm);
   main.append(taskDialog);
 }
