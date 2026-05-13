@@ -11,6 +11,7 @@ import {
   manipulateTaskDialog,
   manipulateTaskModal,
 } from "../taskCreatorComponent/createTaskDialog.js";
+import { appendListDialog, manipulateListDialog } from "../listCreatorComponent/createListDialog.js";
 
 function appendSectionOne() {
   aside.append(sidebarSections[0]);
@@ -42,6 +43,8 @@ function appendSectionFour() {
   sidebarButtons[3].textContent = "Create Task";
   sidebarButtons[3].classList.add("create-task");
   sidebarButtons[3].id = "task-modal";
+  appendListDialog();
+  sidebarButtons[2].addEventListener('click', manipulateListDialog);
   appendTaskDialog();
   sidebarButtons[3].addEventListener("click", manipulateTaskDialog);
 }
