@@ -1,8 +1,12 @@
 import { taskInput, taskLabel, taskOptions } from "./createTaskElements.js";
-import { multiToggleAttribute, setLabelAttributes } from "../toggleAttribute.js";
+import {
+  multiToggleAttribute,
+  setLabelAttributes,
+} from "../toggleAttribute.js";
 import { task } from "../../universalQueries.js";
 import { taskDialog } from "./createTaskDialog.js";
-import { refreshTaskItems } from "../listCreatorComponent/refreshSidebarComponents.js";
+import { refreshTaskItems } from "../sidebarComponent/sidebarRefreshComponents.js";
+import { submitTaskForm } from "../sidebarComponent/sidebarFormsSubmitter.js";
 
 const todoForm = document.createElement("form");
 const todoSelect = document.createElement("select");
@@ -43,11 +47,15 @@ function createTaskForm() {
   }
   todoForm.append(taskLabel[4], todoSelect);
 
-  // Each input id
+  // Each input properties
   taskInput[0].setAttribute("id", "title");
+  taskInput[0].setAttribute("name", "title");
   taskInput[1].setAttribute("id", "description");
+  taskInput[1].setAttribute("name", "description");
   taskInput[2].setAttribute("id", "notes");
+  taskInput[2].setAttribute("name", "notes");
   taskInput[3].setAttribute("id", "due-date");
+  taskInput[3].setAttribute("name", "duedate");
   for (let i = 0; i < 4; i++) {
     if (!(i === 1) && !(i === 2)) {
       multiToggleAttribute(taskInput[i], "required");
@@ -59,7 +67,9 @@ function createTaskForm() {
   submitForm.setAttribute("type", "submit");
   todoForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    refreshTaskItems(); 
+    const formData = new FormData(e.target);
+    submitTaskForm(formData);
+    refreshTaskItems();
   });
 
   // Clear Button

@@ -8,7 +8,6 @@ import {
 } from "./sidebarSections.js";
 
 function appendSidebar() {
-  // collapseSidebar is called by expandSidebar
   expandSidebar();
   appendSectionOne();
   appendSectionTwo();

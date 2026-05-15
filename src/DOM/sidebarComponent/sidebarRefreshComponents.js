@@ -7,9 +7,6 @@ import elementsCreate from "../elementsCreator.js";
 import { setLabelAttributes } from "../toggleAttribute.js";
 import removeChildren from "../removeChildren.js";
 
-// Get all objects div element
-const tasksDiv = document.querySelector("#tasks-div");
-
 // Refresh Tasks list in 'create list' dialog
 function refreshCreateListItems() {
   // Get required components
@@ -19,6 +16,7 @@ function refreshCreateListItems() {
   const createListsDiv = document.querySelector("#create-lists-div");
 
   // No Tasks' case
+  removeChildren(createListsDiv);
   if (todoItemsCount === 0) {
     emptyMessage.textContent = "No Created Tasks";
     createListsDiv.append(emptyMessage);
@@ -28,12 +26,12 @@ function refreshCreateListItems() {
     const checkboxContainer = elementsCreate("div", todoItemsCount);
 
     // Avoid duplicates then append tasks based on their number
-    removeChildren(createListsDiv);
     for (let i = 0; i < todoItemsCount; i++) {
       setLabelAttributes(checkboxLabels[i], todoItems[i].Title, `task-${i}`);
       checkboxElements[i].setAttribute("type", "checkbox");
       checkboxElements[i].setAttribute("id", `task-${i}`);
-      checkboxElements[i].setAttribute("value", `${todoItems.id}`);
+      checkboxElements[i].setAttribute("name", "task");
+      checkboxElements[i].setAttribute("value", `${todoItems[i].id}`);
       checkboxContainer[i].append(checkboxElements[i], checkboxLabels[i]);
       createListsDiv.append(checkboxContainer[i]);
     }
@@ -57,7 +55,11 @@ function refreshListItems() {
   for (let i = 0; i < listItemsCount; i++) {
     listButtons[i].textContent = listItems[i].Name;
     optionsButtons[i].textContent = "...";
-    listContainer[i].append(listButtons[i], optionsButtons[i]);
+    if (i === 0) {
+      listContainer[i].append(listButtons[i]);
+    } else {
+      listContainer[i].append(listButtons[i], optionsButtons[i]);
+    }
     listsDiv.append(listContainer[i]);
   }
 }
