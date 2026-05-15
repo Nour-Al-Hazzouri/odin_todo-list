@@ -1,6 +1,5 @@
 import elementsCreate from "../elementsCreator.js";
 
-// Universal sidebar elements
 const sidebarSections = elementsCreate("section", 4);
 const sidebarDivs = elementsCreate("div", 2);
 const sidebarH2 = elementsCreate("h2", 3);
