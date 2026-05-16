@@ -11,11 +11,11 @@ class ListObjectsFactory {
   set setName(name) {
     if (this.#name === "Default") {
       throw Error("'Default' list is not editable.");
-    } else if ((name !== 'Default') && (name !== 'default')){
+    } else if (name !== "default") {
       this.#name = name;
     } else {
-      throw Error("Cannot use term 'default' as name.")
-    };
+      throw Error("Cannot use term 'default' as name.");
+    }
   }
   get Name() {
     return this.#name;

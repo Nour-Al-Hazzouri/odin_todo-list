@@ -23,7 +23,6 @@ function submitListForm(target) {
     const selectedTasks = target.getAll("task");
     const createdList = createListObject(listName);
     appendTasksToList(createdList, selectedTasks);
-    console.log(createdList);
   }
 }
 

@@ -6,6 +6,7 @@ import { createTodoObject } from "../../objectsComponents/createObjects.js";
 import elementsCreate from "../elementsCreator.js";
 import { setLabelAttributes } from "../toggleAttribute.js";
 import removeChildren from "../removeChildren.js";
+import { renderListOptions } from "../mainPageComponent/mainOptionsPage.js";
 
 // Refresh Tasks list in 'create list' dialog
 function refreshCreateListItems() {
@@ -55,18 +56,21 @@ function refreshListItems() {
   for (let i = 0; i < listItemsCount; i++) {
     listButtons[i].textContent = listItems[i].Name;
     optionsButtons[i].textContent = "...";
+    optionsButtons[i].addEventListener("click", () => {
+      renderListOptions(listItems[i].id);
+    });
     if (i === 0) {
       listContainer[i].append(listButtons[i]);
     } else {
       listContainer[i].append(listButtons[i], optionsButtons[i]);
     }
     listsDiv.append(listContainer[i]);
+    console.log(getListObjects());
   }
 }
 
 function refreshTaskItems() {
   // Get required components
-  const taskItems = getTodoObjects();
   const taskItemsCount = getTodoObjects().length;
   const tasksDiv = document.querySelector(".todos-div");
 
