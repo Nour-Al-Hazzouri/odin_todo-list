@@ -8,7 +8,6 @@ import {
 const listDialog = document.createElement("dialog");
 const closeListDialog = document.createElement("button");
 
-// Render `List` dialog
 function appendListDialog() {
   const listForm = createListForm();
   closeListDialog.textContent = "X";
@@ -16,7 +15,6 @@ function appendListDialog() {
   listDialog.append(closeListDialog, listForm);
   main.append(listDialog);
 }
-
 
 function manipulateListDialog() {
   refreshCreateListItems();

@@ -3,37 +3,35 @@ import {
   multiToggleAttribute,
   setLabelAttributes,
 } from "../toggleAttribute.js";
-import { task } from "../../universalQueries.js";
 import { taskDialog } from "./createTaskDialog.js";
 import { refreshTaskItems } from "../sidebarComponent/sidebarRefreshComponents.js";
 import { submitTaskForm } from "../sidebarComponent/sidebarFormsSubmitter.js";
 
 const todoForm = document.createElement("form");
-const todoSelect = document.createElement("select");
-const submitForm = document.createElement("button");
-const clearForm = document.createElement("button");
 
 function createTaskForm() {
+  const todoSelect = document.createElement("select");
+  const submitForm = document.createElement("button");
+  const clearForm = document.createElement("button");
   todoForm.setAttribute("method", "dialog");
 
-  // task labels
+  // Tasks labels
   setLabelAttributes(taskLabel[0], "Title", "title");
   setLabelAttributes(taskLabel[1], "Description", "description");
   setLabelAttributes(taskLabel[2], "Notes", "notes");
   setLabelAttributes(taskLabel[3], "Due Date", "due-date");
   setLabelAttributes(taskLabel[4], "Priority", "priority");
 
-  // 3 repeated input types
+  // Input types
+  // Text
   for (let i = 0; i < 3; i++) {
     taskInput[i].setAttribute("type", "text");
     todoForm.append(taskLabel[i], taskInput[i]);
   }
-
-  // Date input type
+  // Date
   taskInput[3].setAttribute("type", "date");
   todoForm.append(taskLabel[3], taskInput[3]);
-
-  // Options input
+  // Options
   todoSelect.setAttribute("id", "priority");
   todoSelect.setAttribute("name", "priority");
   taskOptions[0].setAttribute("value", "low");
@@ -42,11 +40,6 @@ function createTaskForm() {
   taskOptions[0].textContent = "Low";
   taskOptions[1].textContent = "Medium";
   taskOptions[2].textContent = "High";
-  for (let i = 0; i < 3; i++) {
-    todoSelect.append(taskOptions[i]);
-  }
-  todoForm.append(taskLabel[4], todoSelect);
-
   // Each input properties
   taskInput[0].setAttribute("id", "title");
   taskInput[0].setAttribute("name", "title");
@@ -61,26 +54,25 @@ function createTaskForm() {
       multiToggleAttribute(taskInput[i], "required");
     }
   }
-
-  // Submit button and form actions
   submitForm.textContent = "Create Task";
   submitForm.setAttribute("type", "submit");
-  todoForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    submitTaskForm(formData);
-    refreshTaskItems();
-  });
-
-  // Clear Button
   clearForm.textContent = "Clear";
   clearForm.setAttribute("type", "reset");
-
-  // Set ids
   todoForm.id = "task-form";
 
-  todoForm.append(submitForm, clearForm);
+  // Append elements accordingly
+  for (let i = 0; i < 3; i++) {
+    todoSelect.append(taskOptions[i]);
+  }
+  todoForm.append(taskLabel[4], todoSelect, submitForm, clearForm);
   return todoForm;
 }
+
+todoForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  submitTaskForm(formData);
+  refreshTaskItems();
+});
 
 export default createTaskForm;

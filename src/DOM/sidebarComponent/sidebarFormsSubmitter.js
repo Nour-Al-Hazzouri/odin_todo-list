@@ -7,7 +7,7 @@ import {
   checkTaskNameDuplicate,
   validateListName,
 } from "../../checkers/checkNameValidation.js";
-import appendTasksToList from "../listCreatorComponent/appendTasksToList.js";
+import appendTasksToList from "../../objectsComponents/appendTasksToList.js";
 import checkInstanceOf from "../../checkers/checkInstanceOfObject.js";
 import checkObjectOccurrence from "../../checkers/checkObjectOccurrence.js";
 import checkReturnedObject from "../../checkers/checkReturnedObject.js";
