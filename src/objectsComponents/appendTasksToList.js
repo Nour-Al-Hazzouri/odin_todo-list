@@ -1,7 +1,7 @@
 import {
   getListObjects,
   getTodoObjects,
-} from "../../objectsComponents/centralObjectsStorage.js";
+} from "./centralObjectsStorage.js";
 
 function appendTasksToList(list, tasks) {
   const taskItems = getTodoObjects();

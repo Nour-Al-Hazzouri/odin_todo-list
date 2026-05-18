@@ -2,7 +2,6 @@ import {
   getListObjects,
   getTodoObjects,
 } from "../../objectsComponents/centralObjectsStorage.js";
-import { createTodoObject } from "../../objectsComponents/createObjects.js";
 import elementsCreate from "../elementsCreator.js";
 import { setLabelAttributes } from "../toggleAttribute.js";
 import removeChildren from "../removeChildren.js";
@@ -10,6 +9,7 @@ import {
   renderListOptions,
   renderTaskOptions,
 } from "../mainPageComponent/mainOptionsPage.js";
+import removeAllChildNodes from "../removeChildren.js";
 
 // Refresh Tasks list in 'create list' dialog
 function refreshCreateListItems() {
@@ -17,13 +17,13 @@ function refreshCreateListItems() {
   const emptyMessage = document.createElement("p");
   const todoItems = getTodoObjects();
   const todoItemsCount = getTodoObjects().length;
-  const createListsDiv = document.querySelector("#create-lists-div");
+  const createlistsContainer = document.querySelector("#create-lists-div");
 
   // No Tasks' case
-  removeChildren(createListsDiv);
+  removeAllChildNodes(createlistsContainer);
   if (todoItemsCount === 0) {
     emptyMessage.textContent = "No Created Tasks";
-    createListsDiv.append(emptyMessage);
+    createlistsContainer.append(emptyMessage);
   } else {
     const checkboxLabels = elementsCreate("label", todoItemsCount);
     const checkboxElements = elementsCreate("input", todoItemsCount);
@@ -37,7 +37,7 @@ function refreshCreateListItems() {
       checkboxElements[i].setAttribute("name", "task");
       checkboxElements[i].setAttribute("value", `${todoItems[i].id}`);
       checkboxContainer[i].append(checkboxElements[i], checkboxLabels[i]);
-      createListsDiv.append(checkboxContainer[i]);
+      createlistsContainer.append(checkboxContainer[i]);
     }
   }
 }
@@ -47,27 +47,31 @@ function refreshListItems() {
   // Get required components
   const listItems = getListObjects();
   const listItemsCount = getListObjects().length;
-  const listsDiv = document.querySelector(".lists-div");
+  const listsContainer = document.querySelector(".lists-div");
 
   // Append List objects based on their number
-  const listContainer = elementsCreate("div", listItemsCount);
+  const listItemsContainer = elementsCreate("div", listItemsCount);
   const listButtons = elementsCreate("button", listItemsCount);
   const optionsButtons = elementsCreate("button", listItemsCount);
 
   // Ensure no duplicates are found then append Lists.
-  removeChildren(listsDiv);
+  removeChildren(listsContainer);
   for (let i = 0; i < listItemsCount; i++) {
     listButtons[i].textContent = listItems[i].Name;
     optionsButtons[i].textContent = "...";
     optionsButtons[i].addEventListener("click", () => {
+      const listOptionsSection = document.querySelector("section#list-options");
+      if (listOptionsSection) {
+        listOptionsSection.remove();
+      }
       renderListOptions(listItems[i].id);
     });
     if (i === 0) {
-      listContainer[i].append(listButtons[i]);
+      listItemsContainer[i].append(listButtons[i]);
     } else {
-      listContainer[i].append(listButtons[i], optionsButtons[i]);
+      listItemsContainer[i].append(listButtons[i], optionsButtons[i]);
     }
-    listsDiv.append(listContainer[i]);
+    listsContainer.append(listItemsContainer[i]);
   }
 }
 
@@ -87,9 +91,14 @@ function refreshTaskItems() {
   for (let i = 0; i < taskItemsCount; i++) {
     taskButtons[i].textContent = taskItems[i].Title;
     optionsButtons[i].textContent = "...";
-    optionsButtons[i].addEventListener("click", () =>
-      renderTaskOptions(taskItems[i].id),
-    );
+    optionsButtons[i].addEventListener("click", () => {
+      const taskOptionsSection = document.querySelector("section#task-options");
+      if (taskOptionsSection) {
+        taskOptionsSection.remove();
+      }
+      renderTaskOptions(taskItems[i].id);
+    });
+
     taskContainer[i].append(taskButtons[i], optionsButtons[i]);
     tasksDiv.append(taskContainer[i]);
   }
