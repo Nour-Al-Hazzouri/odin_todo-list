@@ -8,8 +8,9 @@ import removeChildren from "../removeChildren.js";
 import {
   renderListOptions,
   renderTaskOptions,
-} from "../mainPageComponent/mainOptionsPage.js";
+} from "../mainPageComponent/mainOptionsComponents/mainOptionsPage.js";
 import removeAllChildNodes from "../removeChildren.js";
+import checkReturnedObject from "../../checkers/checkReturnedObject.js";
 
 // Refresh Tasks list in 'create list' dialog
 function refreshCreateListItems() {
@@ -65,6 +66,7 @@ function refreshListItems() {
         listOptionsSection.remove();
       }
       renderListOptions(listItems[i].id);
+      refreshListsRemovedTasks(listItems[i].id);
     });
     if (i === 0) {
       listItemsContainer[i].append(listButtons[i]);
@@ -104,6 +106,31 @@ function refreshTaskItems() {
   }
 }
 
+function refreshListsRemovedTasks(id) {
+  const listItemsDiv = document.querySelector("#list-items");
+  removeAllChildNodes(listItemsDiv);
+  const passedList = checkReturnedObject(id, "list");
+  const listItems = passedList.Items;
+  const listItemsLength = passedList.Items.length;
+  const listOptions = elementsCreate("input", listItemsLength);
+  const labelOptions = elementsCreate("label", listItemsLength);
+  const tasksDivs = elementsCreate("div", listItemsLength);
+  for (let i = 0; i < listItemsLength; i++) {
+    if (passedList.Name === "Default") {
+      continue;
+    } else {
+      listOptions[i].setAttribute("type", "checkbox");
+      listOptions[i].value = passedList.id;
+      listOptions[i].name = "task";
+      listOptions[i].id = `task-${i}`;
+      labelOptions[i].setAttribute("for", `task-${i}`);
+      labelOptions[i].textContent = listItems[i].Title;
+      tasksDivs[i].append(listOptions[i], labelOptions[i]);
+      listItemsDiv.append(tasksDivs[i]);
+    }
+  }
+}
+
 function refreshAllLists() {
   refreshListItems();
   refreshTaskItems();
@@ -114,4 +141,5 @@ export {
   refreshListItems,
   refreshTaskItems,
   refreshAllLists,
+  refreshListsRemovedTasks,
 };

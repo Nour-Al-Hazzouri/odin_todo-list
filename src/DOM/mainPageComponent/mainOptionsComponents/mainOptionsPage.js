@@ -1,6 +1,7 @@
-import { main } from "../../universalQueries.js";
-import removeAllChildNodes from "../removeChildren.js";
-import { refreshListsOptions } from "../sidebarComponent/sidebarRefreshComponents.js";
+import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
+import { main } from "../../../universalQueries.js";
+import removeAllChildNodes from "../../removeChildren.js";
+import { refreshListsOptions, refreshListsRemovedTasks } from "../../sidebarComponent/sidebarRefreshComponents.js";
 import createListOptionsForm from "./listOptionsForm.js";
 import createTaskOptionsForm from "./taskOptionsForm.js";
 
@@ -32,4 +33,13 @@ function renderTaskOptions(id) {
   main.append(taskOptionsSection);
 }
 
-export { renderListOptions, renderTaskOptions };
+function removeSelectedTasks(passedList, formData) {
+  const selectedTasks = formData.getAll("task");
+  let selectedObject;
+  for (let i = 0; i < selectedTasks.length; i++) {
+    selectedObject = checkReturnedObject(selectedTasks[i], "todo");
+    passedList.removeTodoItem(selectedObject);
+  }
+}
+
+export { renderListOptions, renderTaskOptions, removeSelectedTasks };

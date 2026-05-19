@@ -1,6 +1,7 @@
-import checkReturnedObject from "../../checkers/checkReturnedObject.js";
-import elementsCreate from "../elementsCreator.js";
-import { setLabelAttributes } from "../toggleAttribute.js";
+import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
+import elementsCreate from "../../elementsCreator.js";
+import { setLabelAttributes } from "../../toggleAttribute.js";
+import { refreshListItems, refreshTaskItems } from '../../sidebarComponent/sidebarRefreshComponents.js';
 
 let passedTask;
 
@@ -71,12 +72,13 @@ function activateEventListener(taskForm) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const transformedForm = Object.fromEntries(formData);
+    console.log(passedTask);
     passedTask.setTitle = transformedForm.title;
     passedTask.setDescription = transformedForm.description;
     passedTask.setDueDate = transformedForm.duedate;
     passedTask.setPriority = transformedForm.priority;
     passedTask.setNotes = transformedForm.notes;
-    refreshListItems();
+    refreshTaskItems();
   });
 }
 

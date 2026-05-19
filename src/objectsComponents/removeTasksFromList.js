@@ -12,7 +12,7 @@ function removeTasksFromList(list, tasks) {
       list.removeTodoItem(taskItem);
       counter += 1;
     } else {
-      alert("Can't remove tasks from default list")
+      alert("Can't remove tasks from default list");
     }
   }
 }
