@@ -107,11 +107,16 @@ function refreshTaskItems() {
 }
 
 function refreshListsRemovedTasks(id) {
+  const emptyMessage = document.createElement("p");
+  emptyMessage.textContent = "No Added Tasks";
   const listItemsDiv = document.querySelector("#list-items");
   removeAllChildNodes(listItemsDiv);
   const passedList = checkReturnedObject(id, "list");
   const listItems = passedList.Items;
   const listItemsLength = passedList.Items.length;
+  if (listItemsLength === 0) {
+    listItemsDiv.append(emptyMessage);
+  }
   const listOptions = elementsCreate("input", listItemsLength);
   const labelOptions = elementsCreate("label", listItemsLength);
   const tasksDivs = elementsCreate("div", listItemsLength);
