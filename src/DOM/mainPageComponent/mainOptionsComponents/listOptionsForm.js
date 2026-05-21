@@ -20,6 +20,8 @@ function createListOptionsForm(id) {
   const listLabel = document.createElement("label");
   const listInput = document.createElement("input");
   const listSave = document.createElement("button");
+  const tasksTitle = document.createElement("h3");
+  tasksTitle.textContent = "Remove Tasks";
   const listTasksContainer = document.createElement("div");
   passedList = checkReturnedObject(id, "list");
   setLabelAttributes(listLabel, "Name", "list-name");
@@ -29,7 +31,13 @@ function createListOptionsForm(id) {
   listTasksContainer.id = "list-items";
   listSave.textContent = "Save";
   listSave.setAttribute("type", "submit");
-  listForm.append(listLabel, listInput, listTasksContainer, listSave);
+  listForm.append(
+    listLabel,
+    listInput,
+    tasksTitle,
+    listTasksContainer,
+    listSave,
+  );
   activateEventListener(listForm);
   return listForm;
 }

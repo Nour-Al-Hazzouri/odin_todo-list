@@ -36,13 +36,21 @@ function submitTaskForm(target) {
     const taskDueDate = createdTask.duedate;
     const taskPriority = createdTask.priority;
     const taskNotes = createdTask.notes;
-    createTodoObject(
+    const createdTodoObject = createTodoObject(
       taskName,
       taskDescription,
       taskDueDate,
       taskPriority,
       taskNotes,
     );
+    const returnedListIds = target.getAll("list");
+    if (returnedListIds) {
+      let returnedList;
+      for (let i = 0; i < returnedListIds.length; i++) {
+        returnedList = checkReturnedObject(returnedListIds[i], "list");
+        returnedList.appendTodoItem(createdTodoObject);
+      }
+    }
   }
 }
 

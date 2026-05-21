@@ -31,14 +31,6 @@ function appendSectionTwo() {
 }
 
 function appendSectionThree() {
-  aside.append(sidebarSections[2]);
-  sidebarSections[2].append(sidebarH2[1]);
-  sidebarH2[1].textContent = "Your Tasks";
-  sidebarSections[2].append(sidebarDivs[1]);
-  sidebarDivs[1].classList.add("todos-div");
-}
-
-function appendSectionFour() {
   aside.append(sidebarSections[3]);
   sidebarSections[3].append(sidebarButtons[2], sidebarButtons[3]);
   sidebarButtons[2].textContent = "Create List";
@@ -56,5 +48,4 @@ export {
   appendSectionOne,
   appendSectionTwo,
   appendSectionThree,
-  appendSectionFour,
 };
