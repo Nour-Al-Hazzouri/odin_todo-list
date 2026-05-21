@@ -1,5 +1,5 @@
 import { main } from "../../universalQueries.js";
-import { refreshTaskItems } from "../sidebarComponent/sidebarRefreshComponents.js";
+import { refreshCreateTaskItems, refreshTaskItems } from "../sidebarComponent/sidebarRefreshComponents.js";
 import createTaskForm from "./createTaskForm.js";
 
 // Create tasks dialog elements
@@ -16,7 +16,7 @@ function appendTaskDialog() {
 }
 
 function manipulateTaskDialog() {
-  refreshTaskItems();
+  refreshCreateTaskItems();
   taskDialog.showModal();
   closeTaskDialog.addEventListener("click", () => {
     taskDialog.close();

@@ -4,7 +4,6 @@ import {
   appendSectionOne,
   appendSectionTwo,
   appendSectionThree,
-  appendSectionFour,
 } from "./sidebarSections.js";
 
 function appendSidebar() {
@@ -12,7 +11,6 @@ function appendSidebar() {
   appendSectionOne();
   appendSectionTwo();
   appendSectionThree();
-  appendSectionFour();
 }
 
 export { appendSidebar };

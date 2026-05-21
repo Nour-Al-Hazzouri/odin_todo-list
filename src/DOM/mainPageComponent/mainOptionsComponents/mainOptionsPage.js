@@ -6,9 +6,9 @@ import createListOptionsForm from "./listOptionsForm.js";
 import createTaskOptionsForm from "./taskOptionsForm.js";
 
 function renderListOptions(id) {
-  const taskOptionsSection = document.querySelector("section#task-options");
-  if (taskOptionsSection) {
-    taskOptionsSection.remove();
+  const mainSections = document.querySelector("main > section");
+  if (mainSections) {
+    mainSections.remove();
   }
   const listOptionsSection = document.createElement("section");
   listOptionsSection.id = "list-options";
@@ -20,9 +20,9 @@ function renderListOptions(id) {
 }
 
 function renderTaskOptions(id) {
-  const listOptionsSection = document.querySelector("section#list-options");
-  if (listOptionsSection) {
-    listOptionsSection.remove();
+  const mainSections = document.querySelector("main > section");
+  if (mainSections) {
+    mainSections.remove();
   }
   const taskOptionsSection = document.createElement("section");
   taskOptionsSection.id = "task-options";

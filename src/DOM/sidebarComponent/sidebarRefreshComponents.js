@@ -11,6 +11,7 @@ import {
 } from "../mainPageComponent/mainOptionsComponents/mainOptionsPage.js";
 import removeAllChildNodes from "../removeChildren.js";
 import checkReturnedObject from "../../checkers/checkReturnedObject.js";
+import { renderMainListsDetails } from "../mainPageComponent/mainDetailsComponents/mainListsDetailsPage.js";
 
 // Refresh Tasks list in 'create list' dialog
 function refreshCreateListItems() {
@@ -43,6 +44,35 @@ function refreshCreateListItems() {
   }
 }
 
+function refreshCreateTaskItems() {
+  const listsContainer = document.querySelector("#lists-container");
+  removeAllChildNodes(listsContainer);
+  const emptyMessage = document.createElement("p");
+  emptyMessage.textContent = "No Created Lists";
+  const listItems = getListObjects();
+  const listItemsLength = getListObjects().length;
+  if (listItemsLength === 1) {
+    listsContainer.append(emptyMessage);
+  } else {
+    const listElementDiv = elementsCreate("div", listItemsLength);
+    const listElementLabel = elementsCreate("label", listItemsLength);
+    const listElementInput = elementsCreate("input", listItemsLength);
+    for (let i = 0; i < listItemsLength; i++) {
+      if (listItems[i].Name === "Default") {
+        continue;
+      } else {
+        setLabelAttributes(listElementLabel[i], listItems[i].Name, `list-${i}`);
+        listElementInput[i].setAttribute("type", "checkbox");
+        listElementInput[i].name = "list";
+        listElementInput[i].id = `list-${i}`;
+        listElementInput[i].value = listItems[i].id;
+        listElementLabel[i].for = `list-${i}`;
+        listsContainer.append(listElementInput[i], listElementLabel[i]);
+      }
+    }
+  }
+}
+
 // Refresh Lists' list
 function refreshListItems() {
   // Get required components
@@ -59,6 +89,9 @@ function refreshListItems() {
   removeChildren(listsContainer);
   for (let i = 0; i < listItemsCount; i++) {
     listButtons[i].textContent = listItems[i].Name;
+    listButtons[i].addEventListener("click", () => {
+      renderMainListsDetails(listItems[i].id);
+    });
     optionsButtons[i].textContent = "...";
     optionsButtons[i].addEventListener("click", () => {
       const listOptionsSection = document.querySelector("section#list-options");
@@ -77,34 +110,34 @@ function refreshListItems() {
   }
 }
 
-function refreshTaskItems() {
-  // Get required components
-  const taskItems = getTodoObjects();
-  const taskItemsCount = getTodoObjects().length;
-  const tasksDiv = document.querySelector(".todos-div");
+// function refreshTaskItems() {
+//   // Get required components
+//   const taskItems = getTodoObjects();
+//   const taskItemsCount = getTodoObjects().length;
+//   const tasksDiv = document.querySelector(".todos-div");
 
-  // Append List objects based on their number
-  const taskContainer = elementsCreate("div", taskItemsCount);
-  const taskButtons = elementsCreate("button", taskItemsCount);
-  const optionsButtons = elementsCreate("button", taskItemsCount);
+//   // Append List objects based on their number
+//   const taskContainer = elementsCreate("div", taskItemsCount);
+//   const taskButtons = elementsCreate("button", taskItemsCount);
+//   const optionsButtons = elementsCreate("button", taskItemsCount);
 
-  // Ensure no duplicates are found then append Lists.
-  removeChildren(tasksDiv);
-  for (let i = 0; i < taskItemsCount; i++) {
-    taskButtons[i].textContent = taskItems[i].Title;
-    optionsButtons[i].textContent = "...";
-    optionsButtons[i].addEventListener("click", () => {
-      const taskOptionsSection = document.querySelector("section#task-options");
-      if (taskOptionsSection) {
-        taskOptionsSection.remove();
-      }
-      renderTaskOptions(taskItems[i].id);
-    });
+//   // Ensure no duplicates are found then append Lists.
+//   removeChildren(tasksDiv);
+//   for (let i = 0; i < taskItemsCount; i++) {
+//     taskButtons[i].textContent = taskItems[i].Title;
+//     optionsButtons[i].textContent = "...";
+//     optionsButtons[i].addEventListener("click", () => {
+//       const taskOptionsSection = document.querySelector("section#task-options");
+//       if (taskOptionsSection) {
+//         taskOptionsSection.remove();
+//       }
+//       renderTaskOptions(taskItems[i].id);
+//     });
 
-    taskContainer[i].append(taskButtons[i], optionsButtons[i]);
-    tasksDiv.append(taskContainer[i]);
-  }
-}
+//     taskContainer[i].append(taskButtons[i], optionsButtons[i]);
+//     tasksDiv.append(taskContainer[i]);
+//   }
+// }
 
 function refreshListsRemovedTasks(id) {
   const emptyMessage = document.createElement("p");
@@ -143,8 +176,7 @@ function refreshAllLists() {
 
 export {
   refreshCreateListItems,
+  refreshCreateTaskItems,
   refreshListItems,
-  refreshTaskItems,
-  refreshAllLists,
   refreshListsRemovedTasks,
 };

@@ -1,7 +1,7 @@
 import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
 import elementsCreate from "../../elementsCreator.js";
 import { setLabelAttributes } from "../../toggleAttribute.js";
-import { refreshListItems, refreshTaskItems } from '../../sidebarComponent/sidebarRefreshComponents.js';
+import { refreshListItems } from '../../sidebarComponent/sidebarRefreshComponents.js';
 
 let passedTask;
 
@@ -78,7 +78,6 @@ function activateEventListener(taskForm) {
     passedTask.setDueDate = transformedForm.duedate;
     passedTask.setPriority = transformedForm.priority;
     passedTask.setNotes = transformedForm.notes;
-    refreshTaskItems();
   });
 }
 

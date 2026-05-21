@@ -4,8 +4,14 @@ import {
   setLabelAttributes,
 } from "../toggleAttribute.js";
 import { taskDialog } from "./createTaskDialog.js";
-import { refreshTaskItems } from "../sidebarComponent/sidebarRefreshComponents.js";
+import {
+  refreshListItems,
+  refreshTaskItems,
+  refreshCreateTaskItems,
+} from "../sidebarComponent/sidebarRefreshComponents.js";
 import { submitTaskForm } from "../sidebarComponent/sidebarFormsSubmitter.js";
+import { getListObjects } from "../../objectsComponents/centralObjectsStorage.js";
+import elementsCreate from "../elementsCreator.js";
 
 const todoForm = document.createElement("form");
 
@@ -13,6 +19,8 @@ function createTaskForm() {
   const todoSelect = document.createElement("select");
   const submitForm = document.createElement("button");
   const clearForm = document.createElement("button");
+  const listsContainer = document.createElement("div");
+  listsContainer.id = "lists-container";
   todoForm.setAttribute("method", "dialog");
 
   // Tasks labels
@@ -54,6 +62,7 @@ function createTaskForm() {
       multiToggleAttribute(taskInput[i], "required");
     }
   }
+
   submitForm.textContent = "Create Task";
   submitForm.setAttribute("type", "submit");
   clearForm.textContent = "Clear";
@@ -64,7 +73,13 @@ function createTaskForm() {
   for (let i = 0; i < 3; i++) {
     todoSelect.append(taskOptions[i]);
   }
-  todoForm.append(taskLabel[4], todoSelect, submitForm, clearForm);
+  todoForm.append(
+    taskLabel[4],
+    todoSelect,
+    listsContainer,
+    submitForm,
+    clearForm,
+  );
   return todoForm;
 }
 
@@ -72,7 +87,6 @@ todoForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
   submitTaskForm(formData);
-  refreshTaskItems();
 });
 
 export default createTaskForm;
