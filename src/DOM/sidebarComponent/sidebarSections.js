@@ -24,10 +24,16 @@ function appendSectionOne() {
 
 function appendSectionTwo() {
   aside.append(sidebarSections[1]);
-  sidebarSections[1].append(sidebarH2[0]);
-  sidebarH2[0].textContent = "Your Lists";
-  sidebarSections[1].append(sidebarDivs[0]);
+  // sidebarH2[0].textContent = "Your Lists";
+  sidebarH2[3].textContent = "Default Lists";
+  sidebarSections[1].append(
+    sidebarH2[3],
+    sidebarDivs[0],
+    // sidebarH2[0],
+    // sidebarDivs[1],
+  );
   sidebarDivs[0].classList.add("lists-div");
+  sidebarDivs[1].classList.add("user-lists-div");
 }
 
 function appendSectionThree() {
@@ -44,8 +50,4 @@ function appendSectionThree() {
   sidebarButtons[3].addEventListener("click", manipulateTaskDialog);
 }
 
-export {
-  appendSectionOne,
-  appendSectionTwo,
-  appendSectionThree,
-};
+export { appendSectionOne, appendSectionTwo, appendSectionThree };

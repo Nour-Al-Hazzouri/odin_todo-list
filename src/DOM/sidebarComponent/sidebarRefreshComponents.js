@@ -88,16 +88,13 @@ function refreshListItems() {
   // Ensure no duplicates are found then append Lists.
   removeChildren(listsContainer);
   for (let i = 0; i < listItemsCount; i++) {
-    listButtons[i].textContent = listItems[i].Name;
+    listButtons[i].textContent =
+      `${listItems[i].Name} - ${listItems[i].Items.length}`;
     listButtons[i].addEventListener("click", () => {
       renderMainListsDetails(listItems[i].id);
     });
     optionsButtons[i].textContent = "...";
     optionsButtons[i].addEventListener("click", () => {
-      const listOptionsSection = document.querySelector("section#list-options");
-      if (listOptionsSection) {
-        listOptionsSection.remove();
-      }
       renderListOptions(listItems[i].id);
       refreshListsRemovedTasks(listItems[i].id);
     });

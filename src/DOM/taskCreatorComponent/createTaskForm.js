@@ -8,10 +8,12 @@ import {
   refreshListItems,
   refreshTaskItems,
   refreshCreateTaskItems,
+  refreshTasksCount,
 } from "../sidebarComponent/sidebarRefreshComponents.js";
 import { submitTaskForm } from "../sidebarComponent/sidebarFormsSubmitter.js";
 import { getListObjects } from "../../objectsComponents/centralObjectsStorage.js";
 import elementsCreate from "../elementsCreator.js";
+import checkReturnedObject from "../../checkers/checkReturnedObject.js";
 
 const todoForm = document.createElement("form");
 
@@ -87,6 +89,7 @@ todoForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
   submitTaskForm(formData);
+  refreshListItems();
 });
 
 export default createTaskForm;
