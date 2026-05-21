@@ -7,6 +7,8 @@ const listObjectsArray = [];
 
 // Default list to contain all TODO items - MANDATORY
 listObjectsArray[0] = new ListObjectsFactory("Default");
+listObjectsArray[1] = new ListObjectsFactory("Today");
+listObjectsArray[2] = new ListObjectsFactory("This Week");
 
 // Push object based on type
 function saveObject(passedObject) {

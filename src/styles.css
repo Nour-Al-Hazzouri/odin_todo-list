@@ -23,6 +23,11 @@ body {
   border-right: var(--aside-border);
 }
 
+.aside-expanded h2{
+  font-size: 1em;
+  margin: 0;
+}
+
 .aside-expanded > section {
   display: flex;
   flex-direction: column;
