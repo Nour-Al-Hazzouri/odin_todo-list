@@ -1,6 +1,6 @@
 import {
-  createListObject,
   createTodoObject,
+  createListObject,
 } from "../../objectsComponents/createObjects.js";
 import {
   checkListNameDuplicate,
@@ -11,6 +11,8 @@ import appendTasksToList from "../../objectsComponents/appendTasksToList.js";
 import checkInstanceOf from "../../checkers/checkInstanceOfObject.js";
 import checkObjectOccurrence from "../../checkers/checkObjectOccurrence.js";
 import checkReturnedObject from "../../checkers/checkReturnedObject.js";
+import { isThisWeek, isToday } from "date-fns";
+import { getListObjects } from "../../objectsComponents/centralObjectsStorage.js";
 
 function submitListForm(target) {
   const transformedList = Object.fromEntries(target);
@@ -27,9 +29,10 @@ function submitListForm(target) {
 }
 
 function submitTaskForm(target) {
+  const allListItems = getListObjects();
   const createdTask = Object.fromEntries(target);
   const taskName = createdTask.title;
-  if (checkTaskNameDuplicate(createdTask.title)) {
+  if (checkTaskNameDuplicate(taskName)) {
     alert("A task with the same name already exists");
   } else {
     const taskDescription = createdTask.description;

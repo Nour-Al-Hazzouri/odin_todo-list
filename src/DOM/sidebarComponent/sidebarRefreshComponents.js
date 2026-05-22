@@ -58,7 +58,11 @@ function refreshCreateTaskItems() {
     const listElementLabel = elementsCreate("label", listItemsLength);
     const listElementInput = elementsCreate("input", listItemsLength);
     for (let i = 0; i < listItemsLength; i++) {
-      if (listItems[i].Name === "Default") {
+      if (
+        listItems[i].Name === "Default" ||
+        listItems[i].Name === "Today" ||
+        listItems[i].Name === "This Week"
+      ) {
         continue;
       } else {
         setLabelAttributes(listElementLabel[i], listItems[i].Name, `list-${i}`);
@@ -67,7 +71,8 @@ function refreshCreateTaskItems() {
         listElementInput[i].id = `list-${i}`;
         listElementInput[i].value = listItems[i].id;
         listElementLabel[i].for = `list-${i}`;
-        listsContainer.append(listElementInput[i], listElementLabel[i]);
+        listElementDiv[i].append(listElementInput[i], listElementLabel[i]);
+        listsContainer.append(listElementDiv[i]);
       }
     }
   }
@@ -79,14 +84,17 @@ function refreshListItems() {
   const listItems = getListObjects();
   const listItemsCount = getListObjects().length;
   const listsContainer = document.querySelector(".lists-div");
+  const usersContainer = document.querySelector(".user-lists-div");
 
   // Append List objects based on their number
   const listItemsContainer = elementsCreate("div", listItemsCount);
+  const userItemsContainer = elementsCreate("div", listItemsCount);
   const listButtons = elementsCreate("button", listItemsCount);
   const optionsButtons = elementsCreate("button", listItemsCount);
 
   // Ensure no duplicates are found then append Lists.
   removeChildren(listsContainer);
+  removeChildren(usersContainer);
   for (let i = 0; i < listItemsCount; i++) {
     listButtons[i].textContent =
       `${listItems[i].Name} - ${listItems[i].Items.length}`;
@@ -98,43 +106,15 @@ function refreshListItems() {
       renderListOptions(listItems[i].id);
       refreshListsRemovedTasks(listItems[i].id);
     });
-    if (i === 0) {
-      listItemsContainer[i].append(listButtons[i]);
-    } else {
+    if (i === 0 || i === 1 || i === 2) {
+      listsContainer.append(listItemsContainer[i]);
       listItemsContainer[i].append(listButtons[i], optionsButtons[i]);
+    } else {
+      userItemsContainer[i].append(listButtons[i], optionsButtons[i]);
+      usersContainer.append(userItemsContainer[i]);
     }
-    listsContainer.append(listItemsContainer[i]);
   }
 }
-
-// function refreshTaskItems() {
-//   // Get required components
-//   const taskItems = getTodoObjects();
-//   const taskItemsCount = getTodoObjects().length;
-//   const tasksDiv = document.querySelector(".todos-div");
-
-//   // Append List objects based on their number
-//   const taskContainer = elementsCreate("div", taskItemsCount);
-//   const taskButtons = elementsCreate("button", taskItemsCount);
-//   const optionsButtons = elementsCreate("button", taskItemsCount);
-
-//   // Ensure no duplicates are found then append Lists.
-//   removeChildren(tasksDiv);
-//   for (let i = 0; i < taskItemsCount; i++) {
-//     taskButtons[i].textContent = taskItems[i].Title;
-//     optionsButtons[i].textContent = "...";
-//     optionsButtons[i].addEventListener("click", () => {
-//       const taskOptionsSection = document.querySelector("section#task-options");
-//       if (taskOptionsSection) {
-//         taskOptionsSection.remove();
-//       }
-//       renderTaskOptions(taskItems[i].id);
-//     });
-
-//     taskContainer[i].append(taskButtons[i], optionsButtons[i]);
-//     tasksDiv.append(taskContainer[i]);
-//   }
-// }
 
 function refreshListsRemovedTasks(id) {
   const emptyMessage = document.createElement("p");
@@ -151,18 +131,14 @@ function refreshListsRemovedTasks(id) {
   const labelOptions = elementsCreate("label", listItemsLength);
   const tasksDivs = elementsCreate("div", listItemsLength);
   for (let i = 0; i < listItemsLength; i++) {
-    if (passedList.Name === "Default") {
-      continue;
-    } else {
-      listOptions[i].setAttribute("type", "checkbox");
-      listOptions[i].value = passedList.id;
-      listOptions[i].name = "task";
-      listOptions[i].id = `task-${i}`;
-      labelOptions[i].setAttribute("for", `task-${i}`);
-      labelOptions[i].textContent = listItems[i].Title;
-      tasksDivs[i].append(listOptions[i], labelOptions[i]);
-      listItemsDiv.append(tasksDivs[i]);
-    }
+    listOptions[i].setAttribute("type", "checkbox");
+    listOptions[i].value = listItems[i].id;
+    listOptions[i].name = "task";
+    listOptions[i].id = `task-${i}`;
+    labelOptions[i].setAttribute("for", `task-${i}`);
+    labelOptions[i].textContent = listItems[i].Title;
+    tasksDivs[i].append(listOptions[i], labelOptions[i]);
+    listItemsDiv.append(tasksDivs[i]);
   }
 }
 

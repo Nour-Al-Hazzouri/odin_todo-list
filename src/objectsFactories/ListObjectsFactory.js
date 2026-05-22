@@ -9,9 +9,13 @@ class ListObjectsFactory {
   }
 
   set setName(name) {
-    if (this.#name === "Default") {
-      throw Error("'Default' list is not editable.");
-    } else if (name !== "default") {
+    if (
+      this.#name === "Default" ||
+      this.#name === "Today" ||
+      this.#name === "This Week"
+    ) {
+      console.log("Default lists are not editable.");
+    } else if (name !== "default" || name !== "today" || name !== "this week") {
       this.#name = name;
     } else {
       throw Error("Cannot use term 'default' as name.");
