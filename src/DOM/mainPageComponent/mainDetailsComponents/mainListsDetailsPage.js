@@ -1,6 +1,7 @@
 import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
 import elementsCreate from "../../elementsCreator.js";
 import { main } from "../../../universalQueries.js";
+import renderTaskDetails from "./tasksDetailsDialogs.js";
 
 function renderMainListsDetails(id) {
   const passedList = checkReturnedObject(id, "list");
@@ -25,6 +26,9 @@ function renderMainListsDetails(id) {
   const itemsDate = elementsCreate("p", listItemsLength);
   for (let i = 0; i < listItemsLength; i++) {
     itemsButton[i].textContent = listItems[i].Title;
+    itemsButton[i].addEventListener("click", () => {
+      renderTaskDetails(listItems[i]);
+    });
     itemsPriority[i].textContent = listItems[i].Priority;
     itemsDate[i].textContent = listItems[i].DueDate;
     itemsDiv[i].append(itemsButton[i], itemsPriority[i], itemsDate[i]);
