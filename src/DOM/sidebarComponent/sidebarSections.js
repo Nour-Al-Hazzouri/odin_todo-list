@@ -24,13 +24,13 @@ function appendSectionOne() {
 
 function appendSectionTwo() {
   aside.append(sidebarSections[1]);
-  // sidebarH2[0].textContent = "Your Lists";
+  sidebarH2[0].textContent = "Your Lists";
   sidebarH2[3].textContent = "Default Lists";
   sidebarSections[1].append(
     sidebarH2[3],
     sidebarDivs[0],
-    // sidebarH2[0],
-    // sidebarDivs[1],
+    sidebarH2[0],
+    sidebarDivs[1],
   );
   sidebarDivs[0].classList.add("lists-div");
   sidebarDivs[1].classList.add("user-lists-div");

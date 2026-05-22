@@ -1,29 +1,47 @@
 import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
 import { main } from "../../../universalQueries.js";
 import removeAllChildNodes from "../../removeChildren.js";
-import { refreshListsOptions, refreshListsRemovedTasks } from "../../sidebarComponent/sidebarRefreshComponents.js";
+import {
+  refreshCreateListItems,
+  refreshListItems,
+  refreshListsOptions,
+  refreshListsRemovedTasks,
+} from "../../sidebarComponent/sidebarRefreshComponents.js";
 import createListOptionsForm from "./listOptionsForm.js";
-import createTaskOptionsForm from "./taskOptionsForm.js";
+import {
+  deleteObject,
+  getTodoObjects,
+} from "../../../objectsComponents/centralObjectsStorage.js";
+import { removeFromList } from "../../../objectsComponents/objectsManipulation.js";
 
 function renderListOptions(id) {
-  const mainSections = document.querySelector("main > section");
-  if (mainSections) {
-    mainSections.remove();
+  clearMainSection();
+  const returnedObject = checkReturnedObject(id, "list");
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete List";
+  if (
+    returnedObject.Name === "Default" ||
+    returnedObject.Name === "Today" ||
+    returnedObject.Name === "This Week"
+  ) {
+    deleteButton.disabled = true;
   }
   const listOptionsSection = document.createElement("section");
   listOptionsSection.id = "list-options";
   const listH1 = document.createElement("h1");
   listH1.textContent = "List Options";
   const listForm = createListOptionsForm(id);
-  listOptionsSection.append(listH1, listForm);
+  listOptionsSection.append(listH1, listForm, deleteButton);
+  deleteButton.onclick = function () {
+    deleteObject(returnedObject);
+    clearMainSection();
+    refreshListItems();
+  };
   main.append(listOptionsSection);
 }
 
 function renderTaskOptions(id) {
-  const mainSections = document.querySelector("main > section");
-  if (mainSections) {
-    mainSections.remove();
-  }
+  clearMainSection();
   const taskOptionsSection = document.createElement("section");
   taskOptionsSection.id = "task-options";
   const taskH1 = document.createElement("h1");
@@ -34,12 +52,24 @@ function renderTaskOptions(id) {
 }
 
 function removeSelectedTasks(passedList, formData) {
-  const selectedTasks = formData.getAll("task");
   let selectedObject;
-  for (let i = 0; i < selectedTasks.length; i++) {
-    selectedObject = checkReturnedObject(selectedTasks[i], "todo");
-    passedList.removeTodoItem(selectedObject);
+  for (let i = 0; i < formData.length; i++) {
+    selectedObject = checkReturnedObject(formData[i], "todo");
+    removeFromList(passedList, selectedObject);
+  }
+  refreshCreateListItems();
+}
+
+function clearMainSection() {
+  const mainSections = document.querySelector("main > section");
+  if (mainSections) {
+    mainSections.remove();
   }
 }
 
-export { renderListOptions, renderTaskOptions, removeSelectedTasks };
+export {
+  renderListOptions,
+  renderTaskOptions,
+  removeSelectedTasks,
+  clearMainSection,
+};

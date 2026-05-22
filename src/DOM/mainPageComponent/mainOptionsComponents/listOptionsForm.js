@@ -1,4 +1,9 @@
+import checkObjectOccurrence from "../../../checkers/checkObjectOccurrence.js";
 import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
+import {
+  deleteObject,
+  getListObjects,
+} from "../../../objectsComponents/centralObjectsStorage.js";
 import elementsCreate from "../../elementsCreator.js";
 import removeAllChildNodes from "../../removeChildren.js";
 import {
@@ -26,6 +31,13 @@ function createListOptionsForm(id) {
   passedList = checkReturnedObject(id, "list");
   setLabelAttributes(listLabel, "Name", "list-name");
   listInput.value = `${passedList.Name}`;
+  if (
+    passedList.Name === "Default" ||
+    passedList.Name === "Today" ||
+    passedList.Name === "This Week"
+  ) {
+    listInput.disabled = true;
+  }
   listInput.name = "list-name";
   listInput.id = "list-name";
   listTasksContainer.id = "list-items";
@@ -38,6 +50,7 @@ function createListOptionsForm(id) {
     listTasksContainer,
     listSave,
   );
+
   activateEventListener(listForm);
   return listForm;
 }
@@ -45,10 +58,15 @@ function createListOptionsForm(id) {
 function activateEventListener(listForm) {
   listForm.addEventListener("submit", (e) => {
     e.preventDefault();
+    const taskItems = getListObjects();
+    const defaultList = taskItems[0];
+    const todaysList = taskItems[1];
+    const weeksList = taskItems[2];
     const formData = new FormData(e.target);
     passedList.setName = formData.get("list-name");
     if (formData.getAll("task")) {
-      removeSelectedTasks(passedList, formData);
+      const allSelectedTasks = formData.getAll("task");
+      removeSelectedTasks(passedList, allSelectedTasks);
       refreshListsRemovedTasks(passedList.id);
     }
     refreshListItems();
