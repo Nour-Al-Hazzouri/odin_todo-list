@@ -49,6 +49,28 @@ class TodoObjectsFactory {
   get id() {
     return this.#id;
   }
+  toJSON() {
+    return {
+      title: this.#title,
+      description: this.#description,
+      dueDate: this.#dueDate,
+      priority: this.#priority,
+      notes: this.#notes,
+      id: this.#id,
+    };
+  }
+
+  static fromJSON(object) {
+    const instance = new TodoObjectsFactory(
+      object.title,
+      object.description,
+      object.dueDate,
+      object.priority,
+      object.notes,
+    );
+    instance.#id = object.id;
+    return instance;
+  }
 }
 
 export default TodoObjectsFactory;

@@ -8,8 +8,6 @@ function renderTaskDetails(task) {
   closeButton.classList.add("close-btn");
   closeButton.textContent = 'X';
   const taskMainDiv = document.createElement("div");
-  const taskMainH1 = document.createElement("h2");
-  taskMainH1.textContent = "Task Details";
   const taskMainH3 = document.createElement("h3");
   taskMainH3.textContent = task.Title;
   const taskDescription = document.createElement("p");
@@ -29,7 +27,7 @@ function renderTaskDetails(task) {
     taskNotes,
   );
   taskInfoDialog.append(taskMainDiv);
-  main.append(taskMainH1, taskInfoDialog);
+  main.append(taskInfoDialog);
   taskInfoDialog.showModal();
   closeButton.addEventListener("click", () => {
     taskInfoDialog.close();

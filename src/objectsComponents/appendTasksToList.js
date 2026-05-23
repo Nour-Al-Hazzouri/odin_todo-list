@@ -1,6 +1,7 @@
 import {
   getListObjects,
   getTodoObjects,
+  syncListObjects,
 } from "./centralObjectsStorage.js";
 
 function appendTasksToList(list, tasks) {
@@ -13,6 +14,7 @@ function appendTasksToList(list, tasks) {
       counter += 1;
     }
   }
+  syncListObjects();
 }
 
 export default appendTasksToList;
