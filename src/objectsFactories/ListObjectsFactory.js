@@ -1,7 +1,9 @@
+import TodoObjectsFactory from "./TodoObjectsFactory.js";
+
 class ListObjectsFactory {
   #id;
   #name;
-  #items = new Array();
+  #items = [];
 
   constructor(name) {
     this.#id = crypto.randomUUID();
@@ -36,6 +38,24 @@ class ListObjectsFactory {
   }
   removeTodoItem(passedTodoItem) {
     this.#items.splice(this.#items.indexOf(passedTodoItem), 1);
+  }
+
+  toJSON() {
+    return {
+      id: this.#id,
+      name: this.#name,
+      items: this.#items,
+    };
+  }
+  static fromJSON(data) {
+    const instance = new ListObjectsFactory(data.name);
+    instance.#id = data.id;
+    if (data.items) {
+      instance.#items = data.items.map((item) =>
+        TodoObjectsFactory.fromJSON(item)
+      );
+    }
+    return instance;
   }
 }
 

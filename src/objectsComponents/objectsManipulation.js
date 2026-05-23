@@ -1,7 +1,7 @@
 import checkInstanceConditionOf from "../checkers/checkInstanceCondition.js";
 import checkInstanceOf from "../checkers/checkInstanceOfObject.js";
 import checkObjectOccurrence from "../checkers/checkObjectOccurrence.js";
-import { deleteTodoObject, getListObjects, saveObject } from "./centralObjectsStorage.js";
+import { deleteTodoObject, getListObjects, saveObject, syncListObjects, syncTodoObjects } from "./centralObjectsStorage.js";
 
 // Add Tasks in Lists dynamically
 function appendTodoToList(list, todoObject) {
@@ -38,6 +38,8 @@ function removeFromList(list, todoObject) {
         thisWeeksList.removeTodoItem(todoObject);
       }
       deleteTodoObject(todoObject);
+      syncListObjects();
+      syncTodoObjects();
     } else {
       console.log(`Item not in list`);
     }
