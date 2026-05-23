@@ -21,6 +21,8 @@ function createTaskForm() {
   const todoSelect = document.createElement("select");
   const submitForm = document.createElement("button");
   const clearForm = document.createElement("button");
+  const taskH3 = document.createElement('h3');
+  taskH3.textContent = "Add to List";
   const listsContainer = document.createElement("div");
   listsContainer.id = "lists-container";
   todoForm.setAttribute("method", "dialog");
@@ -78,6 +80,7 @@ function createTaskForm() {
   todoForm.append(
     taskLabel[4],
     todoSelect,
+    taskH3,
     listsContainer,
     submitForm,
     clearForm,
