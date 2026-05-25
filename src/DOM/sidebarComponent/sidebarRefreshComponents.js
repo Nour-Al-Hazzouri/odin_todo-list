@@ -19,13 +19,13 @@ function refreshCreateListItems() {
   const emptyMessage = document.createElement("p");
   const todoItems = getTodoObjects();
   const todoItemsCount = getTodoObjects().length;
-  const createlistsContainer = document.querySelector("#create-lists-div");
+  const createListsContainer = document.querySelector("#create-lists-div");
 
   // No Tasks' case
-  removeAllChildNodes(createlistsContainer);
+  removeAllChildNodes(createListsContainer);
   if (todoItemsCount === 0) {
     emptyMessage.textContent = "No Created Tasks";
-    createlistsContainer.append(emptyMessage);
+    createListsContainer.append(emptyMessage);
   } else {
     const checkboxLabels = elementsCreate("label", todoItemsCount);
     const checkboxElements = elementsCreate("input", todoItemsCount);
@@ -39,7 +39,7 @@ function refreshCreateListItems() {
       checkboxElements[i].setAttribute("name", "task");
       checkboxElements[i].setAttribute("value", `${todoItems[i].id}`);
       checkboxContainer[i].append(checkboxElements[i], checkboxLabels[i]);
-      createlistsContainer.append(checkboxContainer[i]);
+      createListsContainer.append(checkboxContainer[i]);
     }
   }
 }
