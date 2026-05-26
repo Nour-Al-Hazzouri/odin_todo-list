@@ -18,7 +18,7 @@ function collapseSidebar() {
   }
   sidebarButtons[1].classList.remove("display-none");
   sidebarButtons[1].textContent = "→";
-  sidebarButtons[1].classList.add("expand-button");
+  sidebarButtons[1].classList.add("sidebar-btn");
   aside.append(sidebarButtons[1]);
   sidebarButtons[1].addEventListener("click", expandSidebar);
 }

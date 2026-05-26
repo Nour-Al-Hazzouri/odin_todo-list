@@ -13,6 +13,7 @@ function appendListDialog() {
   closeListDialog.textContent = "X";
   closeListDialog.classList.add("close-btn");
   listDialog.append(closeListDialog, listForm);
+  listDialog.id = "list-dialog"
   main.append(listDialog);
 }
 

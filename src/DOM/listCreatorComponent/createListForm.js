@@ -14,7 +14,11 @@ function createListForm() {
   listForm.setAttribute("method", "dialog");
   const listLabel = document.createElement("label");
   const listInput = document.createElement("input");
+  const tasksListLabel = document.createElement('h3');
+  tasksListLabel.textContent = "Choose Tasks";
+  tasksListLabel.classList.add("dialogs-h3");
   const tasksList = document.createElement("div");
+  tasksList.classList.add("dialogs-list");
   const submitButton = document.createElement("button");
   const empty = document.createElement("p");
   
@@ -32,7 +36,7 @@ function createListForm() {
   submitButton.textContent = "Create List";
   submitButton.setAttribute("type", "submit");
 
-  listForm.append(listLabel, listInput, tasksList, submitButton);
+  listForm.append(listLabel, listInput, tasksListLabel, tasksList, submitButton);
   return listForm;
 }
 
