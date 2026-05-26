@@ -20,6 +20,7 @@ function appendSectionOne() {
   aside.append(sidebarSections[0]);
   sidebarSections[0].append(sidebarButtons[0]);
   sidebarButtons[0].textContent = "←";
+  sidebarButtons[0].classList.add("sidebar-btn");
 }
 
 function appendSectionTwo() {
@@ -32,8 +33,8 @@ function appendSectionTwo() {
     sidebarH2[0],
     sidebarDivs[1],
   );
-  sidebarDivs[0].classList.add("lists-div");
-  sidebarDivs[1].classList.add("user-lists-div");
+  sidebarDivs[0].id = "aside-lists";
+  sidebarDivs[1].id = "user-aside-lists";
 }
 
 function appendSectionThree() {

@@ -27,7 +27,9 @@ function createListOptionsForm(id) {
   const listSave = document.createElement("button");
   const tasksTitle = document.createElement("h3");
   tasksTitle.textContent = "Remove Tasks";
+  tasksTitle.classList.add("dialogs-h3");
   const listTasksContainer = document.createElement("div");
+  listTasksContainer.classList.add("dialogs-list");
   passedList = checkReturnedObject(id, "list");
   setLabelAttributes(listLabel, "Name", "list-name");
   listInput.value = `${passedList.Name}`;

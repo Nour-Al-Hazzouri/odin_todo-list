@@ -13,9 +13,10 @@ import {
   getTodoObjects,
 } from "../../../objectsComponents/centralObjectsStorage.js";
 import { removeFromList } from "../../../objectsComponents/objectsManipulation.js";
+import removeMainSections from "../../removeMainSections.js";
 
 function renderListOptions(id) {
-  clearMainSection();
+  removeMainSections();
   const returnedObject = checkReturnedObject(id, "list");
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "Delete List";
@@ -34,7 +35,7 @@ function renderListOptions(id) {
   listOptionsSection.append(listH1, listForm, deleteButton);
   deleteButton.onclick = function () {
     deleteObject(returnedObject);
-    clearMainSection();
+    removeMainSections();
     refreshListItems();
   };
   main.append(listOptionsSection);
@@ -60,16 +61,8 @@ function removeSelectedTasks(passedList, formData) {
   refreshCreateListItems();
 }
 
-function clearMainSection() {
-  const mainSections = document.querySelector("main > section");
-  if (mainSections) {
-    mainSections.remove();
-  }
-}
-
 export {
   renderListOptions,
   renderTaskOptions,
   removeSelectedTasks,
-  clearMainSection,
 };

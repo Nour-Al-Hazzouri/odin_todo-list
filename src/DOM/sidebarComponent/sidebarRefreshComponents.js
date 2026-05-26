@@ -83,8 +83,8 @@ function refreshListItems() {
   // Get required components
   const listItems = getListObjects();
   const listItemsCount = getListObjects().length;
-  const listsContainer = document.querySelector(".lists-div");
-  const usersContainer = document.querySelector(".user-lists-div");
+  const listsContainer = document.querySelector("#aside-lists");
+  const usersContainer = document.querySelector("#user-aside-lists");
 
   // Append List objects based on their number
   const listItemsContainer = elementsCreate("div", listItemsCount);

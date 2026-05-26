@@ -2,13 +2,11 @@ import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
 import elementsCreate from "../../elementsCreator.js";
 import { main } from "../../../universalQueries.js";
 import renderTaskDetails from "./tasksDetailsDialogs.js";
+import removeMainSections from "../../removeMainSections.js";
 
 function renderMainListsDetails(id) {
+  removeMainSections();
   const passedList = checkReturnedObject(id, "list");
-  const mainSections = document.querySelector("main > section");
-  if (mainSections) {
-    mainSections.remove();
-  }
   const listItems = passedList.Items;
   const listItemsLength = passedList.Items.length;
   const mainListSection = document.createElement("section");
@@ -20,7 +18,6 @@ function renderMainListsDetails(id) {
   const listItemsContainer = document.createElement("div");
   const listItemsUl = document.createElement("ul");
   const itemsLi = elementsCreate("li", listItemsLength);
-  const itemsDiv = elementsCreate("div", listItemsLength);
   const itemsButton = elementsCreate("button", listItemsLength);
   const itemsPriority = elementsCreate("p", listItemsLength);
   const itemsDate = elementsCreate("p", listItemsLength);
@@ -30,9 +27,9 @@ function renderMainListsDetails(id) {
       renderTaskDetails(listItems[i]);
     });
     itemsPriority[i].textContent = listItems[i].Priority;
+    itemsPriority[i].dataset.priority = listItems[i].Priority;
     itemsDate[i].textContent = listItems[i].DueDate;
-    itemsDiv[i].append(itemsButton[i], itemsPriority[i], itemsDate[i]);
-    itemsLi[i].append(itemsDiv[i]);
+    itemsLi[i].append(itemsButton[i], itemsPriority[i], itemsDate[i]);
     listItemsUl.append(itemsLi[i]);
   }
   listItemsContainer.append(listItemsUl);

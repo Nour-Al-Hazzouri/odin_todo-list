@@ -12,6 +12,7 @@ function appendTaskDialog() {
   closeTaskDialog.textContent = "X";
   closeTaskDialog.classList.add("close-btn");
   taskDialog.append(closeTaskDialog, taskForm);
+  taskDialog.id = "task-dialog"
   main.append(taskDialog);
 }
 
