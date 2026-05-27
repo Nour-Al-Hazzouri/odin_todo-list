@@ -6,6 +6,8 @@ import removeMainSections from "../../removeMainSections.js";
 
 function renderMainListsDetails(id) {
   removeMainSections();
+  const emptyMessage = document.createElement('p');
+  emptyMessage.textContent = "No Current Tasks";
   const passedList = checkReturnedObject(id, "list");
   const listItems = passedList.Items;
   const listItemsLength = passedList.Items.length;
@@ -34,6 +36,9 @@ function renderMainListsDetails(id) {
   }
   listItemsContainer.append(listItemsUl);
   mainListSection.append(mainListH1, mainListName, listItemsContainer);
+  if (listItemsLength === 0) {
+    mainListSection.append(emptyMessage)
+  }
   main.append(mainListSection);
 }
 

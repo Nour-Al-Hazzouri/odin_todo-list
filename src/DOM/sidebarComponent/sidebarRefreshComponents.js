@@ -51,7 +51,7 @@ function refreshCreateTaskItems() {
   emptyMessage.textContent = "No Created Lists";
   const listItems = getListObjects();
   const listItemsLength = getListObjects().length;
-  if (listItemsLength === 1) {
+  if (listItemsLength === 3) {
     listsContainer.append(emptyMessage);
   } else {
     const listElementDiv = elementsCreate("div", listItemsLength);
