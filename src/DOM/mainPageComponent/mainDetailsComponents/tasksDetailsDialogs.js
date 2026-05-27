@@ -16,6 +16,7 @@ function renderTaskDetails(task) {
   taskDueDate.textContent = task.DueDate;
   const taskPriority = document.createElement("p");
   taskPriority.textContent = task.Priority;
+  taskPriority.dataset.priority = task.Priority;
   const taskNotes = document.createElement("p");
   taskNotes.textContent = task.Notes;
   taskMainDiv.append(
