@@ -36,7 +36,8 @@ function createListOptionsForm(id) {
   if (
     passedList.Name === "Default" ||
     passedList.Name === "Today" ||
-    passedList.Name === "This Week"
+    passedList.Name === "This Week" ||
+    passedList.Name === "Completed"
   ) {
     listInput.disabled = true;
   }
@@ -61,11 +62,10 @@ function activateEventListener(listForm) {
   listForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const taskItems = getListObjects();
-    const defaultList = taskItems[0];
-    const todaysList = taskItems[1];
-    const weeksList = taskItems[2];
     const formData = new FormData(e.target);
-    passedList.setName = formData.get("list-name");
+    if (!taskItems[0] || !taskItems[1] || !taskItems[2] || !taskItems[3]) {
+      passedList.setName = formData.get("list-name");
+    }
     if (formData.getAll("task")) {
       const allSelectedTasks = formData.getAll("task");
       removeSelectedTasks(passedList, allSelectedTasks);
