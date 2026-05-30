@@ -1,0 +1,61 @@
+import {
+  createTodoObject,
+  createListObject,
+} from "../../objectsComponents/createObjects.js";
+import {
+  checkListNameDuplicate,
+  checkTaskNameDuplicate,
+  validateListName,
+} from "../../checkers/checkNameValidation.js";
+import appendTasksToList from "../../objectsComponents/appendTasksToList.js";
+import checkInstanceOf from "../../checkers/checkInstanceOfObject.js";
+import checkObjectOccurrence from "../../checkers/checkObjectOccurrence.js";
+import checkReturnedObject from "../../checkers/checkReturnedObject.js";
+import { isThisWeek, isToday } from "date-fns";
+import { getListObjects, syncListObjects } from "../../objectsComponents/centralObjectsStorage.js";
+
+function submitListForm(target) {
+  const transformedList = Object.fromEntries(target);
+  const listName = transformedList.name;
+  if (checkListNameDuplicate(transformedList.name)) {
+    alert("A list with the same name already exists");
+  } else if (validateListName(transformedList.name)) {
+    alert("List name not allowed");
+  } else {
+    const selectedTasks = target.getAll("task");
+    const createdList = createListObject(listName);
+    appendTasksToList(createdList, selectedTasks);
+  }
+}
+
+function submitTaskForm(target) {
+  const allListItems = getListObjects();
+  const createdTask = Object.fromEntries(target);
+  const taskName = createdTask.title;
+  if (checkTaskNameDuplicate(taskName)) {
+    alert("A task with the same name already exists");
+  } else {
+    const taskDescription = createdTask.description;
+    const taskDueDate = createdTask.duedate;
+    const taskPriority = createdTask.priority;
+    const taskNotes = createdTask.notes;
+    const createdTodoObject = createTodoObject(
+      taskName,
+      taskDescription,
+      taskDueDate,
+      taskPriority,
+      taskNotes,
+    );
+    const returnedListIds = target.getAll("list");
+    if (returnedListIds) {
+      let returnedList;
+      for (let i = 0; i < returnedListIds.length; i++) {
+        returnedList = checkReturnedObject(returnedListIds[i], "list");
+        returnedList.appendTodoItem(createdTodoObject);
+      }
+      syncListObjects();
+    }
+  }
+}
+
+export { submitListForm, submitTaskForm };

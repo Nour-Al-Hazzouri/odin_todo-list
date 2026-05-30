@@ -1,2 +1,6 @@
-import './styles.css';
-document.addEventListener("DOMContentLoaded", alert("Hi"))
+import "./styles.css";
+import { appendSidebar } from "./DOM/sidebarComponent/sidebarInterface.js";
+import { refreshListItems } from "./DOM/sidebarComponent/sidebarRefreshComponents.js";
+
+appendSidebar();
+refreshListItems();
