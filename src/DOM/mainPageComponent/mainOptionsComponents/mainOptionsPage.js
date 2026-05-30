@@ -23,7 +23,8 @@ function renderListOptions(id) {
   if (
     returnedObject.Name === "Default" ||
     returnedObject.Name === "Today" ||
-    returnedObject.Name === "This Week"
+    returnedObject.Name === "This Week" ||
+    returnedObject.Name === "Completed"
   ) {
     deleteButton.disabled = true;
   }
@@ -61,8 +62,4 @@ function removeSelectedTasks(passedList, formData) {
   refreshCreateListItems();
 }
 
-export {
-  renderListOptions,
-  renderTaskOptions,
-  removeSelectedTasks,
-};
+export { renderListOptions, renderTaskOptions, removeSelectedTasks };

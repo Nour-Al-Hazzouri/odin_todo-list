@@ -6,14 +6,23 @@ class TodoObjectsFactory {
   #dueDate;
   #priority;
   #notes;
+  #completeStatus;
 
-  constructor(title, description, dueDate, priority, notes) {
+  constructor(
+    title,
+    description,
+    dueDate,
+    priority,
+    notes,
+    completeStatus = false,
+  ) {
     this.#id = crypto.randomUUID();
     this.#title = title;
     this.#description = description;
     this.#dueDate = dueDate;
     this.#priority = priority;
     this.#notes = notes;
+    this.#completeStatus = completeStatus;
   }
 
   set setTitle(title) {
@@ -49,6 +58,18 @@ class TodoObjectsFactory {
   get id() {
     return this.#id;
   }
+  set setCompleteStatus(status) {
+    if (status === true) {
+      this.#completeStatus = true;
+    } else if (status === false) {
+      this.#completeStatus = false;
+    } else {
+      throw Error("Unknown completion status");
+    }
+  }
+  get CompleteStatus() {
+    return this.#completeStatus;
+  }
   toJSON() {
     return {
       title: this.#title,
@@ -57,6 +78,7 @@ class TodoObjectsFactory {
       priority: this.#priority,
       notes: this.#notes,
       id: this.#id,
+      completeStatus: this.#completeStatus,
     };
   }
 
@@ -67,6 +89,7 @@ class TodoObjectsFactory {
       object.dueDate,
       object.priority,
       object.notes,
+      object.completeStatus,
     );
     instance.#id = object.id;
     return instance;

@@ -3,6 +3,7 @@ import ListObjectsFactory from "../objectsFactories/ListObjectsFactory.js";
 import checkInstanceOf from "../checkers/checkInstanceOfObject.js";
 import { isThisISOWeek, isThisWeek, isToday } from "date-fns";
 import { removeFromList } from "./objectsManipulation.js";
+import checkObjectOccurrence from "../checkers/checkObjectOccurrence.js";
 
 let todoObjectsArray = [];
 let listObjectsArray = [];
@@ -10,21 +11,6 @@ let listObjectsArray = [];
 const fetchLists = localStorage.getItem("listObjectsArray");
 const fetchTodos = localStorage.getItem("todoObjectsArray");
 
-if (fetchLists) {
-  const listParse = JSON.parse(fetchLists);
-  listObjectsArray = listParse.map((object) =>
-    ListObjectsFactory.fromJSON(object),
-  );
-} else {
-  // Only use defaults if "listObjectsArray" key is missing from storage entirely
-  listObjectsArray = [
-    new ListObjectsFactory("Default"),
-    new ListObjectsFactory("Today"),
-    new ListObjectsFactory("This Week"),
-  ];
-}
-
-// 2. Handle Global Tasks Independently
 if (fetchTodos) {
   const taskParse = JSON.parse(fetchTodos);
   todoObjectsArray = taskParse.map((object) =>
@@ -32,6 +18,21 @@ if (fetchTodos) {
   );
 } else {
   todoObjectsArray = [];
+}
+
+if (fetchLists) {
+  const listParse = JSON.parse(fetchLists);
+  listObjectsArray = listParse.map((object) =>
+    ListObjectsFactory.fromJSON(object, todoObjectsArray)
+  );
+} else {
+  // Only use defaults if "listObjectsArray" key is missing from storage entirely
+  listObjectsArray = [
+    new ListObjectsFactory("Default"),
+    new ListObjectsFactory("Today"),
+    new ListObjectsFactory("This Week"),
+    new ListObjectsFactory("Completed"),
+  ];
 }
 
 function syncListObjects() {
@@ -42,7 +43,6 @@ function syncTodoObjects() {
   const savedTodoUpdates = JSON.stringify(todoObjectsArray);
   localStorage.setItem("todoObjectsArray", savedTodoUpdates);
 }
-
 
 // Push object based on type
 function saveObject(passedObject) {
@@ -71,7 +71,8 @@ function deleteObject(passedObject) {
     checkInstanceOf(passedObject) === "list" &&
     !(passedObject === listObjectsArray[0]) &&
     !(passedObject === listObjectsArray[1]) &&
-    !(passedObject === listObjectsArray[2])
+    !(passedObject === listObjectsArray[2]) &&
+    !(passedObject === listObjectsArray[3])
   ) {
     listObjectsArray.splice(listObjectsArray.indexOf(passedObject), 1);
     syncListObjects();
@@ -86,6 +87,7 @@ function getTodoObjects() {
 function getListObjects() {
   return listObjectsArray;
 }
+
 function deleteTodoObject(todoObject) {
   todoObjectsArray.splice(todoObjectsArray.indexOf(todoObject), 1);
   syncTodoObjects();
