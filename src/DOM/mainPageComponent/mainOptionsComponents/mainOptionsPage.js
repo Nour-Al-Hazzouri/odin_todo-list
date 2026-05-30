@@ -4,6 +4,7 @@ import removeAllChildNodes from "../../removeChildren.js";
 import {
   refreshCreateListItems,
   refreshListItems,
+  refreshListsAddTasks,
   refreshListsOptions,
   refreshListsRemovedTasks,
 } from "../../sidebarComponent/sidebarRefreshComponents.js";
@@ -12,8 +13,12 @@ import {
   deleteObject,
   getTodoObjects,
 } from "../../../objectsComponents/centralObjectsStorage.js";
-import { removeFromList } from "../../../objectsComponents/objectsManipulation.js";
+import {
+  appendTodoToList,
+  removeFromList,
+} from "../../../objectsComponents/objectsManipulation.js";
 import removeMainSections from "../../removeMainSections.js";
+import appendTasksToList from "../../../objectsComponents/appendTasksToList.js";
 
 function renderListOptions(id) {
   removeMainSections();
@@ -23,7 +28,8 @@ function renderListOptions(id) {
   if (
     returnedObject.Name === "Default" ||
     returnedObject.Name === "Today" ||
-    returnedObject.Name === "This Week"
+    returnedObject.Name === "This Week" ||
+    returnedObject.Name === "Completed"
   ) {
     deleteButton.disabled = true;
   }
@@ -61,8 +67,17 @@ function removeSelectedTasks(passedList, formData) {
   refreshCreateListItems();
 }
 
+function addSelectedTasks(passedList, formData) {
+  let selectedObject;
+  for (let i = 0; i < formData.length; i++) {
+    selectedObject = checkReturnedObject(formData[i], "todo");
+    appendTodoToList(passedList, selectedObject);
+  }
+}
+
 export {
   renderListOptions,
   renderTaskOptions,
   removeSelectedTasks,
+  addSelectedTasks,
 };

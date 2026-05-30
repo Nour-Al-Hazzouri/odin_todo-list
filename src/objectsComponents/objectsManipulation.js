@@ -1,7 +1,13 @@
 import checkInstanceConditionOf from "../checkers/checkInstanceCondition.js";
 import checkInstanceOf from "../checkers/checkInstanceOfObject.js";
 import checkObjectOccurrence from "../checkers/checkObjectOccurrence.js";
-import { deleteTodoObject, getListObjects, saveObject, syncListObjects, syncTodoObjects } from "./centralObjectsStorage.js";
+import {
+  deleteTodoObject,
+  getListObjects,
+  saveObject,
+  syncListObjects,
+  syncTodoObjects,
+} from "./centralObjectsStorage.js";
 
 // Add Tasks in Lists dynamically
 function appendTodoToList(list, todoObject) {
@@ -10,6 +16,7 @@ function appendTodoToList(list, todoObject) {
   } else {
     if (!checkObjectOccurrence(list, todoObject)) {
       list.appendTodoItem(todoObject);
+      syncListObjects();
     } else {
       throw Error("Item already in list.");
     }
@@ -19,29 +26,24 @@ function appendTodoToList(list, todoObject) {
 // remove Tasks from Lists dynamically
 function removeFromList(list, todoObject) {
   const listItems = getListObjects();
-  const defaultList = listItems[0];
-  const todaysList = listItems[1];
-  const thisWeeksList = listItems[2];
+  const listItemsCount = listItems.length;
 
   if (!checkInstanceConditionOf(list, todoObject)) {
-    throw Error("Can't remove from list. Check list and object.");
+    throw Error("Check List and Task objects");
   } else {
     if (checkObjectOccurrence(list, todoObject)) {
-      list.removeTodoItem(todoObject);
-      if (checkObjectOccurrence(defaultList, todoObject)) {
-        defaultList.removeTodoItem(todoObject);
+      if (list.Name === 'Default') {
+        deleteTodoObject(todoObject);
+        syncTodoObjects();
+        for (let i = 0; i < listItemsCount; i++) {
+          listItems[i].removeTodoItem(todoObject);
+        }
+      } else {
+        list.removeTodoItem(todoObject);
       }
-      if (checkObjectOccurrence(todaysList, todoObject)) {
-        todaysList.removeTodoItem(todoObject);
-      }
-      if (checkObjectOccurrence(thisWeeksList, todoObject)) {
-        thisWeeksList.removeTodoItem(todoObject);
-      }
-      deleteTodoObject(todoObject);
       syncListObjects();
-      syncTodoObjects();
     } else {
-      console.log(`Item not in list`);
+      throw Error(`Item not in list`);
     }
   }
 }

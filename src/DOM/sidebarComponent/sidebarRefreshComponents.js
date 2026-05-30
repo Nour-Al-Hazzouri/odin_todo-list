@@ -12,34 +12,38 @@ import {
 import removeAllChildNodes from "../removeChildren.js";
 import checkReturnedObject from "../../checkers/checkReturnedObject.js";
 import { renderMainListsDetails } from "../mainPageComponent/mainDetailsComponents/mainListsDetailsPage.js";
+import checkObjectOccurrence from "../../checkers/checkObjectOccurrence.js";
 
 // Refresh Tasks list in 'create list' dialog
 function refreshCreateListItems() {
   // Get required components
   const emptyMessage = document.createElement("p");
+  const listItems = getListObjects();
   const todoItems = getTodoObjects();
   const todoItemsCount = getTodoObjects().length;
   const createListsContainer = document.querySelector("#create-lists-div");
-
   // No Tasks' case
   removeAllChildNodes(createListsContainer);
-  if (todoItemsCount === 0) {
+
+  if (todoItemsCount === 0 || todoItemsCount === listItems[3].Items.length) {
     emptyMessage.textContent = "No Created Tasks";
     createListsContainer.append(emptyMessage);
   } else {
     const checkboxLabels = elementsCreate("label", todoItemsCount);
     const checkboxElements = elementsCreate("input", todoItemsCount);
     const checkboxContainer = elementsCreate("div", todoItemsCount);
-
-    // Avoid duplicates then append tasks based on their number
     for (let i = 0; i < todoItemsCount; i++) {
-      setLabelAttributes(checkboxLabels[i], todoItems[i].Title, `task-${i}`);
-      checkboxElements[i].setAttribute("type", "checkbox");
-      checkboxElements[i].setAttribute("id", `task-${i}`);
-      checkboxElements[i].setAttribute("name", "task");
-      checkboxElements[i].setAttribute("value", `${todoItems[i].id}`);
-      checkboxContainer[i].append(checkboxElements[i], checkboxLabels[i]);
-      createListsContainer.append(checkboxContainer[i]);
+      if (todoItems[i].CompleteStatus === true) {
+        continue;
+      } else {
+        setLabelAttributes(checkboxLabels[i], todoItems[i].Title, `task-${i}`);
+        checkboxElements[i].setAttribute("type", "checkbox");
+        checkboxElements[i].setAttribute("id", `task-${i}`);
+        checkboxElements[i].setAttribute("name", "task");
+        checkboxElements[i].setAttribute("value", `${todoItems[i].id}`);
+        checkboxContainer[i].append(checkboxElements[i], checkboxLabels[i]);
+        createListsContainer.append(checkboxContainer[i]);
+      }
     }
   }
 }
@@ -51,7 +55,7 @@ function refreshCreateTaskItems() {
   emptyMessage.textContent = "No Created Lists";
   const listItems = getListObjects();
   const listItemsLength = getListObjects().length;
-  if (listItemsLength === 1) {
+  if (listItemsLength === 4) {
     listsContainer.append(emptyMessage);
   } else {
     const listElementDiv = elementsCreate("div", listItemsLength);
@@ -61,7 +65,8 @@ function refreshCreateTaskItems() {
       if (
         listItems[i].Name === "Default" ||
         listItems[i].Name === "Today" ||
-        listItems[i].Name === "This Week"
+        listItems[i].Name === "This Week" ||
+        listItems[i].Name === "Completed"
       ) {
         continue;
       } else {
@@ -105,10 +110,14 @@ function refreshListItems() {
     optionsButtons[i].addEventListener("click", () => {
       renderListOptions(listItems[i].id);
       refreshListsRemovedTasks(listItems[i].id);
+      refreshListsAddTasks(listItems[i].id);
     });
     if (i === 0 || i === 1 || i === 2) {
       listsContainer.append(listItemsContainer[i]);
       listItemsContainer[i].append(listButtons[i], optionsButtons[i]);
+    } else if (i === 3) {
+      listsContainer.append(listItemsContainer[i]);
+      listItemsContainer[i].append(listButtons[i]);
     } else {
       userItemsContainer[i].append(listButtons[i], optionsButtons[i]);
       usersContainer.append(userItemsContainer[i]);
@@ -142,6 +151,52 @@ function refreshListsRemovedTasks(id) {
   }
 }
 
+function refreshListsAddTasks(id) {
+  const listItemsDiv = document.querySelector("#added-list-items");
+  const passedList = checkReturnedObject(id, "list");
+  const listItems = getTodoObjects();
+  const listItemsLength = listItems.length;
+  removeAllChildNodes(listItemsDiv);
+  const emptyMessage = document.createElement("p");
+  emptyMessage.textContent = "No Tasks to Add";
+  if (
+    passedList.Name === "Default" ||
+    passedList.Name === "Today" ||
+    passedList.Name === "This Week" ||
+    passedList.Name === "Completed"
+  ) {
+    emptyMessage.textContent = "Can't Add to Default Lists";
+    listItemsDiv.append(emptyMessage);
+  }
+  const listOptions = elementsCreate("input", listItemsLength);
+  const labelOptions = elementsCreate("label", listItemsLength);
+  const tasksDivs = elementsCreate("div", listItemsLength);
+  for (let i = 0; i < listItemsLength; i++) {
+    if (
+      checkObjectOccurrence(passedList, listItems[i]) ||
+      passedList.Name === "Default" ||
+      passedList.Name === "Today" ||
+      passedList.Name === "This Week" ||
+      passedList.Name === "Completed"
+    ) {
+      continue;
+    } else {
+      listOptions[i].setAttribute("type", "checkbox");
+      listOptions[i].value = listItems[i].id;
+      listOptions[i].name = "add-task";
+      listOptions[i].id = `add-task-${i}`;
+      labelOptions[i].setAttribute("for", `add-task-${i}`);
+      labelOptions[i].textContent = listItems[i].Title;
+      tasksDivs[i].append(listOptions[i], labelOptions[i]);
+      listItemsDiv.append(tasksDivs[i]);
+    }
+  }
+   if (listItemsDiv.childElementCount === 0) {
+    emptyMessage.textContent = "No Tasks to Add";
+    listItemsDiv.append(emptyMessage);
+  }
+}
+
 function refreshAllLists() {
   refreshListItems();
   refreshTaskItems();
@@ -152,4 +207,5 @@ export {
   refreshCreateTaskItems,
   refreshListItems,
   refreshListsRemovedTasks,
+  refreshListsAddTasks,
 };
