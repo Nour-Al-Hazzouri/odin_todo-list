@@ -2,9 +2,9 @@ import checkObjectOccurrence from "../../../checkers/checkObjectOccurrence.js";
 import {
   getListObjects,
   syncListObjects,
-  syncTodoObjects,
+  syncTaskObjects,
 } from "../../../objectsComponents/centralObjectsStorage.js";
-import { appendTodoToList } from "../../../objectsComponents/objectsManipulation.js";
+import { appendTaskToList } from "../../../objectsComponents/objectsManipulation.js";
 import {
   refreshCreateListItems,
   refreshListItems,
@@ -20,13 +20,13 @@ function completeTask(task) {
       continue;
     } else {
       if (checkObjectOccurrence(allListItems[i], task)) {
-        allListItems[i].removeTodoItem(task);
+        allListItems[i].removeTaskItem(task);
       }
     }
   }
-  appendTodoToList(completedList, task);
+  appendTaskToList(completedList, task);
   task.setCompleteStatus = true;
-  syncTodoObjects();
+  syncTaskObjects();
   syncListObjects();
   refreshListItems();
   refreshCreateListItems();

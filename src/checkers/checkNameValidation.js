@@ -1,6 +1,6 @@
 import {
   getListObjects,
-  getTodoObjects,
+  getTaskObjects,
 } from "../objectsComponents/centralObjectsStorage.js";
 
 // Check if same `List` name is used
@@ -21,8 +21,8 @@ function checkListNameDuplicate(name) {
 
 // Check if `Task` name is used
 function checkTaskNameDuplicate(name) {
-  const taskItems = getTodoObjects();
-  const taskItemsCount = getTodoObjects().length;
+  const taskItems = getTaskObjects();
+  const taskItemsCount = getTaskObjects().length;
   if (!name) {
     throw Error("Ensure you correctly passed task name");
   } else {

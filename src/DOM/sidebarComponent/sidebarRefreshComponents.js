@@ -1,6 +1,6 @@
 import {
   getListObjects,
-  getTodoObjects,
+  getTaskObjects,
 } from "../../objectsComponents/centralObjectsStorage.js";
 import elementsCreate from "../elementsCreator.js";
 import { setLabelAttributes } from "../toggleAttribute.js";
@@ -16,28 +16,28 @@ function refreshCreateListItems() {
   // Get required components
   const emptyMessage = document.createElement("p");
   const listItems = getListObjects();
-  const todoItems = getTodoObjects();
-  const todoItemsCount = getTodoObjects().length;
+  const taskItems = getTaskObjects();
+  const taskItemsCount = getTaskObjects().length;
   const createListsContainer = document.querySelector("#create-lists-div");
   // No Tasks' case
   removeAllChildNodes(createListsContainer);
 
-  if (todoItemsCount === 0 || todoItemsCount === listItems[3].Items.length) {
+  if (taskItemsCount === 0 || taskItemsCount === listItems[3].Items.length) {
     emptyMessage.textContent = "No Created Tasks";
     createListsContainer.append(emptyMessage);
   } else {
-    const checkboxLabels = elementsCreate("label", todoItemsCount);
-    const checkboxElements = elementsCreate("input", todoItemsCount);
-    const checkboxContainer = elementsCreate("div", todoItemsCount);
-    for (let i = 0; i < todoItemsCount; i++) {
-      if (todoItems[i].CompleteStatus === true) {
+    const checkboxLabels = elementsCreate("label", taskItemsCount);
+    const checkboxElements = elementsCreate("input", taskItemsCount);
+    const checkboxContainer = elementsCreate("div", taskItemsCount);
+    for (let i = 0; i < taskItemsCount; i++) {
+      if (taskItems[i].CompleteStatus === true) {
         continue;
       } else {
-        setLabelAttributes(checkboxLabels[i], todoItems[i].Title, `task-${i}`);
+        setLabelAttributes(checkboxLabels[i], taskItems[i].Title, `task-${i}`);
         checkboxElements[i].setAttribute("type", "checkbox");
         checkboxElements[i].setAttribute("id", `task-${i}`);
         checkboxElements[i].setAttribute("name", "task");
-        checkboxElements[i].setAttribute("value", `${todoItems[i].id}`);
+        checkboxElements[i].setAttribute("value", `${taskItems[i].id}`);
         checkboxContainer[i].append(checkboxElements[i], checkboxLabels[i]);
         createListsContainer.append(checkboxContainer[i]);
       }
@@ -151,7 +151,7 @@ function refreshListsRemovedTasks(id) {
 function refreshListsAddTasks(id) {
   const listItemsDiv = document.querySelector("#added-list-items");
   const passedList = checkReturnedObject(id, "list");
-  const listItems = getTodoObjects();
+  const listItems = getTaskObjects();
   const listItemsLength = listItems.length;
   removeAllChildNodes(listItemsDiv);
   const emptyMessage = document.createElement("p");

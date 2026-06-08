@@ -12,7 +12,7 @@ function createTaskOptionsForm(id) {
   const taskOptions = elementsCreate("option", 3);
   const taskSave = document.createElement("button");
 
-  passedTask = checkReturnedObject(id, "todo");
+  passedTask = checkReturnedObject(id, "task");
   setLabelAttributes(taskLabel[0], "Title", "task-title");
   setLabelAttributes(taskLabel[1], "Description", "task-description");
   setLabelAttributes(taskLabel[2], "Due Date", "task-duedate");

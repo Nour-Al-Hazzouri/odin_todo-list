@@ -1,11 +1,11 @@
 import checkInstanceOf from "./checkInstanceOfObject.js";
 
 // Ensure passed objects are List and TODO objects
-function checkInstanceConditionOf(listObject, todoObject) {
+function checkInstanceConditionOf(listObject, taskObject) {
   if (checkInstanceOf(listObject) !== "list") {
     throw Error("Not a list instance.");
-  } else if (checkInstanceOf(todoObject) !== "todo") {
-    throw Error("Not a todo object.");
+  } else if (checkInstanceOf(taskObject) !== "task") {
+    throw Error("Not a task object.");
   } else {
     return true;
   }

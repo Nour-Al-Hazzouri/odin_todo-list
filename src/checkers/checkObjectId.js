@@ -1,15 +1,15 @@
 import {
   getListObjects,
-  getTodoObjects,
+  getTaskObjects,
 } from "../objectsComponents/centralObjectsStorage.js";
 import checkInstanceOf from "./checkInstanceOfObject.js";
 
 function checkObjectId(passedObject) {
   const listObjects = getListObjects();
-  const todoObjects = getTodoObjects();
-  if (checkInstanceOf(passedObject) === "todo") {
-    for (const todoObject of todoObjects) {
-      if (passedObject.id === todoObject.id) {
+  const taskObjects = getTaskObjects();
+  if (checkInstanceOf(passedObject) === "task") {
+    for (const taskObject of taskObjects) {
+      if (passedObject.id === taskObject.id) {
         return passedObject.id;
       }
     }

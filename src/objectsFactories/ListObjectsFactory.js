@@ -1,4 +1,4 @@
-import TodoObjectsFactory from "./TodoObjectsFactory.js";
+import TaskObjectsFactory from "./TaskObjectsFactory.js";
 
 class ListObjectsFactory {
   #id;
@@ -39,12 +39,12 @@ class ListObjectsFactory {
     return this.#id;
   }
 
-  appendTodoItem(passedTodoItem) {
-    this.#items.push(passedTodoItem);
+  appendTaskItem(passedTaskItem) {
+    this.#items.push(passedTaskItem);
   }
-  removeTodoItem(passedTodoItem) {
+  removeTaskItem(passedTaskItem) {
     // 1. Find the index first
-    const index = this.#items.indexOf(passedTodoItem);
+    const index = this.#items.indexOf(passedTaskItem);
     // 2. Only splice IF the index is NOT -1
     if (index !== -1) {
       this.#items.splice(index, 1);
@@ -58,19 +58,19 @@ class ListObjectsFactory {
       items: this.#items,
     };
   }
-  static fromJSON(data, globalTodos = []) {
+  static fromJSON(data, globalTasks = []) {
     const instance = new ListObjectsFactory(data.name);
     instance.#id = data.id;
 
     if (data.items) {
       instance.#items = data.items.map((item) => {
         // Link the reference from the global tasks
-        const existingTaskReference = globalTodos.find(
+        const existingTaskReference = globalTasks.find(
           (globalTask) => globalTask.id === item.id,
         );
 
         // Return existing reference or fallback to creating a new one
-        return existingTaskReference || TodoObjectsFactory.fromJSON(item);
+        return existingTaskReference || TaskObjectsFactory.fromJSON(item);
       });
     }
 

@@ -1,5 +1,5 @@
 import {
-  createTodoObject,
+  createTaskObject,
   createListObject,
 } from "../../objectsComponents/createObjects.js";
 import {
@@ -35,7 +35,7 @@ function submitTaskForm(target) {
     const taskDueDate = createdTask.duedate;
     const taskPriority = createdTask.priority;
     const taskNotes = createdTask.notes;
-    const createdTodoObject = createTodoObject(
+    const createdTaskObject = createTaskObject(
       taskName,
       taskDescription,
       taskDueDate,
@@ -47,7 +47,7 @@ function submitTaskForm(target) {
       let returnedList;
       for (let i = 0; i < returnedListIds.length; i++) {
         returnedList = checkReturnedObject(returnedListIds[i], "list");
-        returnedList.appendTodoItem(createdTodoObject);
+        returnedList.appendTaskItem(createdTaskObject);
       }
       syncListObjects();
     }

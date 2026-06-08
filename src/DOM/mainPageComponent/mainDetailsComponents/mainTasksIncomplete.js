@@ -2,7 +2,7 @@ import checkObjectOccurrence from "../../../checkers/checkObjectOccurrence.js";
 import {
   getListObjects,
   syncListObjects,
-  syncTodoObjects,
+  syncTaskObjects,
 } from "../../../objectsComponents/centralObjectsStorage.js";
 import { removeFromList } from "../../../objectsComponents/objectsManipulation.js";
 import {
@@ -18,16 +18,16 @@ function deCompleteTask(task) {
   const completedList = allListItems[3];
 
   if (isToday(task.DueDate && checkObjectOccurrence(todaysList, task))) {
-    todaysList.appendTodoItem(task);
+    todaysList.appendTaskItem(task);
   } else if (
     isThisWeek(task.DueDate) &&
     checkObjectOccurrence(thisWeeksList, task)
   ) {
-    thisWeeksList.appendTodoItem(task);
+    thisWeeksList.appendTaskItem(task);
   }
   removeFromList(completedList, task);
   task.setCompleteStatus = false;
-  syncTodoObjects();
+  syncTaskObjects();
   syncListObjects();
   refreshListItems();
   refreshCreateListItems();
