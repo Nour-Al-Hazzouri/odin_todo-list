@@ -1,8 +1,4 @@
-import {
-  getListObjects,
-  getTodoObjects,
-  syncListObjects,
-} from "./centralObjectsStorage.js";
+import { getTodoObjects, syncListObjects } from "./centralObjectsStorage.js";
 
 function appendTasksToList(list, tasks) {
   const taskItems = getTodoObjects();

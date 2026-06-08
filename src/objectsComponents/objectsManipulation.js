@@ -1,10 +1,8 @@
 import checkInstanceConditionOf from "../checkers/checkInstanceCondition.js";
-import checkInstanceOf from "../checkers/checkInstanceOfObject.js";
 import checkObjectOccurrence from "../checkers/checkObjectOccurrence.js";
 import {
   deleteTodoObject,
   getListObjects,
-  saveObject,
   syncListObjects,
   syncTodoObjects,
 } from "./centralObjectsStorage.js";

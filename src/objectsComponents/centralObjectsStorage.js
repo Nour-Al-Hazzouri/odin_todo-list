@@ -1,9 +1,7 @@
 import TodoObjectsFactory from "../objectsFactories/TodoObjectsFactory.js";
 import ListObjectsFactory from "../objectsFactories/ListObjectsFactory.js";
 import checkInstanceOf from "../checkers/checkInstanceOfObject.js";
-import { isThisISOWeek, isThisWeek, isToday } from "date-fns";
-import { removeFromList } from "./objectsManipulation.js";
-import checkObjectOccurrence from "../checkers/checkObjectOccurrence.js";
+import { isThisWeek, isToday } from "date-fns";
 
 let todoObjectsArray = [];
 let listObjectsArray = [];

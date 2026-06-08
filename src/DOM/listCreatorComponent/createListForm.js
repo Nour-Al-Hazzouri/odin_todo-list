@@ -1,10 +1,4 @@
-import { getTodoObjects } from "../../objectsComponents/centralObjectsStorage.js";
-import elementsCreate from "../elementsCreator.js";
 import { setLabelAttributes } from "../toggleAttribute.js";
-import {
-  createListObject,
-  createTodoObject,
-} from "../../objectsComponents/createObjects.js";
 import { refreshListItems } from "../sidebarComponent/sidebarRefreshComponents.js";
 import { submitListForm } from "../sidebarComponent/sidebarFormsSubmitter.js";
 
@@ -20,7 +14,6 @@ function createListForm() {
   const tasksList = document.createElement("div");
   tasksList.classList.add("dialogs-list");
   const submitButton = document.createElement("button");
-  const empty = document.createElement("p");
 
   listForm.id = "list-form";
 

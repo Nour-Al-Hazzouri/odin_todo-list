@@ -1,10 +1,6 @@
 import checkObjectOccurrence from "../../../checkers/checkObjectOccurrence.js";
 import {
-  deleteObject,
-  getCompletedTodosObjects,
   getListObjects,
-  saveCompletedObject,
-  syncCompletedTodosObjects,
   syncListObjects,
   syncTodoObjects,
 } from "../../../objectsComponents/centralObjectsStorage.js";
@@ -13,13 +9,10 @@ import {
   refreshCreateListItems,
   refreshListItems,
 } from "../../sidebarComponent/sidebarRefreshComponents.js";
-import { deleteTodoObject } from "../../../objectsComponents/centralObjectsStorage.js";
 
 function completeTask(task) {
   const allListItems = getListObjects();
   const listItemsCount = getListObjects().length;
-  const todaysList = allListItems[1];
-  const thisWeeksList = allListItems[2];
   const completedList = allListItems[3];
 
   for (let i = 0; i < listItemsCount; i++) {

@@ -37,7 +37,6 @@ function checkTaskNameDuplicate(name) {
 
 // Prohibit usage of certain names
 function validateListName(name) {
-  const listItems = getListObjects();
   const listItemsCount = getListObjects().length;
   if (!name) {
     throw Error("Ensure you correctly passed list name");

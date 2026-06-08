@@ -1,19 +1,14 @@
 import checkObjectOccurrence from "../../../checkers/checkObjectOccurrence.js";
 import {
-  deleteObject,
   getListObjects,
   syncListObjects,
   syncTodoObjects,
 } from "../../../objectsComponents/centralObjectsStorage.js";
-import {
-  appendTodoToList,
-  removeFromList,
-} from "../../../objectsComponents/objectsManipulation.js";
+import { removeFromList } from "../../../objectsComponents/objectsManipulation.js";
 import {
   refreshCreateListItems,
   refreshListItems,
 } from "../../sidebarComponent/sidebarRefreshComponents.js";
-import { deleteTodoObject } from "../../../objectsComponents/centralObjectsStorage.js";
 import { isThisWeek, isToday } from "date-fns";
 
 function deCompleteTask(task) {

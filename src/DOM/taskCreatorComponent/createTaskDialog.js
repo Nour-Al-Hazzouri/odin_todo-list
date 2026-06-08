@@ -1,8 +1,5 @@
 import { main } from "../../universalQueries.js";
-import {
-  refreshCreateTaskItems,
-  refreshTaskItems,
-} from "../sidebarComponent/sidebarRefreshComponents.js";
+import { refreshCreateTaskItems } from "../sidebarComponent/sidebarRefreshComponents.js";
 import createTaskForm from "./createTaskForm.js";
 
 // Create tasks dialog elements

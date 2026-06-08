@@ -1,23 +1,12 @@
-import checkObjectOccurrence from "../../../checkers/checkObjectOccurrence.js";
 import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
-import {
-  deleteObject,
-  getListObjects,
-} from "../../../objectsComponents/centralObjectsStorage.js";
-import elementsCreate from "../../elementsCreator.js";
-import removeAllChildNodes from "../../removeChildren.js";
+import { getListObjects } from "../../../objectsComponents/centralObjectsStorage.js";
 import {
   refreshListItems,
   refreshListsAddTasks,
   refreshListsRemovedTasks,
 } from "../../sidebarComponent/sidebarRefreshComponents.js";
 import { setLabelAttributes } from "../../toggleAttribute.js";
-import {
-  addSelectedTasks,
-  removeSelectedTasks,
-  renderListsRemovedTasks,
-  renderTaskOptions,
-} from "./mainOptionsPage.js";
+import { addSelectedTasks, removeSelectedTasks } from "./mainOptionsPage.js";
 
 let passedList;
 

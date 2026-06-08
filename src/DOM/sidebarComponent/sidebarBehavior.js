@@ -1,12 +1,6 @@
-import {
-  sidebarSections,
-  sidebarButtons,
-  sidebarh2,
-  sidebarDivs,
-} from "./sidebarElements.js";
+import { sidebarSections, sidebarButtons } from "./sidebarElements.js";
 
-import { body, aside, main } from "../../universalQueries.js";
-import elementsCreate from "../elementsCreator.js";
+import { aside, main } from "../../universalQueries.js";
 
 function collapseSidebar() {
   aside.classList.remove("aside-expanded");

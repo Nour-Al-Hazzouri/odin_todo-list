@@ -3,17 +3,8 @@ import {
   multiToggleAttribute,
   setLabelAttributes,
 } from "../toggleAttribute.js";
-import { taskDialog } from "./createTaskDialog.js";
-import {
-  refreshListItems,
-  refreshTaskItems,
-  refreshCreateTaskItems,
-  refreshTasksCount,
-} from "../sidebarComponent/sidebarRefreshComponents.js";
+import { refreshListItems } from "../sidebarComponent/sidebarRefreshComponents.js";
 import { submitTaskForm } from "../sidebarComponent/sidebarFormsSubmitter.js";
-import { getListObjects } from "../../objectsComponents/centralObjectsStorage.js";
-import elementsCreate from "../elementsCreator.js";
-import checkReturnedObject from "../../checkers/checkReturnedObject.js";
 
 const todoForm = document.createElement("form");
 
