@@ -1,9 +1,6 @@
 import { main } from "../../universalQueries.js";
 import createListForm from "./createListForm.js";
-import {
-  refreshCreateListItems,
-  refreshListItems,
-} from "../sidebarComponent/sidebarRefreshComponents.js";
+import { refreshCreateListItems } from "../sidebarComponent/sidebarRefreshComponents.js";
 
 const listDialog = document.createElement("dialog");
 const closeListDialog = document.createElement("button");
@@ -13,7 +10,7 @@ function appendListDialog() {
   closeListDialog.textContent = "X";
   closeListDialog.classList.add("close-btn");
   listDialog.append(closeListDialog, listForm);
-  listDialog.id = "list-dialog"
+  listDialog.id = "list-dialog";
   main.append(listDialog);
 }
 

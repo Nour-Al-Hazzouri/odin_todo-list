@@ -3,14 +3,7 @@ import elementsCreate from "../../elementsCreator.js";
 import { main } from "../../../universalQueries.js";
 import renderTaskDetails from "./tasksDetailsDialogs.js";
 import removeMainSections from "../../removeMainSections.js";
-import {
-  getCompletedTodosObjects,
-  syncTodoObjects,
-} from "../../../objectsComponents/centralObjectsStorage.js";
-import { completeTask } from "./mainTasksComplete.js";
-import { deCompleteTask } from "./mainTasksIncomplete.js";
 import { completeTaskProcess } from "./mainCompletionProcess.js";
-import { refreshCreateListItems } from "../../sidebarComponent/sidebarRefreshComponents.js";
 
 function renderMainListsDetails(id) {
   removeMainSections();

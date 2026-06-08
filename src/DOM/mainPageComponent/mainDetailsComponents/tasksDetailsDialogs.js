@@ -1,12 +1,4 @@
-import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
-import {
-  syncListObjects,
-  syncTodoObjects,
-} from "../../../objectsComponents/centralObjectsStorage.js";
 import { main } from "../../../universalQueries.js";
-import removeMainSections from "../../removeMainSections.js";
-import { completeTask } from "./mainTasksComplete.js";
-import { deCompleteTask } from "./mainTasksIncomplete.js";
 
 function renderTaskDetails(task) {
   const taskInfoDialog = document.createElement("dialog");

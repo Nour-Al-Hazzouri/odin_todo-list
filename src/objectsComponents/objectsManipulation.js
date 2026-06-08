@@ -1,10 +1,8 @@
 import checkInstanceConditionOf from "../checkers/checkInstanceCondition.js";
-import checkInstanceOf from "../checkers/checkInstanceOfObject.js";
 import checkObjectOccurrence from "../checkers/checkObjectOccurrence.js";
 import {
   deleteTodoObject,
   getListObjects,
-  saveObject,
   syncListObjects,
   syncTodoObjects,
 } from "./centralObjectsStorage.js";
@@ -32,7 +30,7 @@ function removeFromList(list, todoObject) {
     throw Error("Check List and Task objects");
   } else {
     if (checkObjectOccurrence(list, todoObject)) {
-      if (list.Name === 'Default') {
+      if (list.Name === "Default") {
         deleteTodoObject(todoObject);
         syncTodoObjects();
         for (let i = 0; i < listItemsCount; i++) {

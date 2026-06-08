@@ -1,24 +1,17 @@
 import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
 import { main } from "../../../universalQueries.js";
-import removeAllChildNodes from "../../removeChildren.js";
 import {
   refreshCreateListItems,
   refreshListItems,
-  refreshListsAddTasks,
-  refreshListsOptions,
-  refreshListsRemovedTasks,
 } from "../../sidebarComponent/sidebarRefreshComponents.js";
 import createListOptionsForm from "./listOptionsForm.js";
-import {
-  deleteObject,
-  getTodoObjects,
-} from "../../../objectsComponents/centralObjectsStorage.js";
+import createTaskOptionsForm from "./taskOptionsForm.js";
+import { deleteObject } from "../../../objectsComponents/centralObjectsStorage.js";
 import {
   appendTodoToList,
   removeFromList,
 } from "../../../objectsComponents/objectsManipulation.js";
 import removeMainSections from "../../removeMainSections.js";
-import appendTasksToList from "../../../objectsComponents/appendTasksToList.js";
 
 function renderListOptions(id) {
   removeMainSections();
@@ -48,7 +41,7 @@ function renderListOptions(id) {
 }
 
 function renderTaskOptions(id) {
-  clearMainSection();
+  removeMainSections();
   const taskOptionsSection = document.createElement("section");
   taskOptionsSection.id = "task-options";
   const taskH1 = document.createElement("h1");

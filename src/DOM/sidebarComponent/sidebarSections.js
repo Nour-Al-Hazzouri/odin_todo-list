@@ -4,12 +4,10 @@ import {
   sidebarH2,
   sidebarDivs,
 } from "./sidebarElements.js";
-import { body, aside } from "../../universalQueries.js";
-import { appendCreateTaskPage } from "./sidebarBehavior.js";
+import { aside } from "../../universalQueries.js";
 import {
   appendTaskDialog,
   manipulateTaskDialog,
-  manipulateTaskModal,
 } from "../taskCreatorComponent/createTaskDialog.js";
 import {
   appendListDialog,

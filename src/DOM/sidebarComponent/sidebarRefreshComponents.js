@@ -5,10 +5,7 @@ import {
 import elementsCreate from "../elementsCreator.js";
 import { setLabelAttributes } from "../toggleAttribute.js";
 import removeChildren from "../removeChildren.js";
-import {
-  renderListOptions,
-  renderTaskOptions,
-} from "../mainPageComponent/mainOptionsComponents/mainOptionsPage.js";
+import { renderListOptions } from "../mainPageComponent/mainOptionsComponents/mainOptionsPage.js";
 import removeAllChildNodes from "../removeChildren.js";
 import checkReturnedObject from "../../checkers/checkReturnedObject.js";
 import { renderMainListsDetails } from "../mainPageComponent/mainDetailsComponents/mainListsDetailsPage.js";
@@ -191,15 +188,10 @@ function refreshListsAddTasks(id) {
       listItemsDiv.append(tasksDivs[i]);
     }
   }
-   if (listItemsDiv.childElementCount === 0) {
+  if (listItemsDiv.childElementCount === 0) {
     emptyMessage.textContent = "No Tasks to Add";
     listItemsDiv.append(emptyMessage);
   }
-}
-
-function refreshAllLists() {
-  refreshListItems();
-  refreshTaskItems();
 }
 
 export {

@@ -34,12 +34,13 @@ h3,
 label {
   color: var(--secondary-text);
 }
-input, select {
+input,
+select {
   background-color: var(--main-background);
   color: var(--primary-text);
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1);
+  filter: invert(1);
 }
 button {
   max-width: 130px;
