@@ -6,6 +6,7 @@ import removeMainSections from "../../removeMainSections.js";
 import { completeTaskProcess } from "./mainCompletionProcess.js";
 
 function renderMainListsDetails(id) {
+  let returnedTaskItem;
   removeMainSections();
   const emptyMessage = document.createElement("p");
   emptyMessage.textContent = "No Current Tasks";
@@ -27,20 +28,21 @@ function renderMainListsDetails(id) {
   const completeStatusButtons = elementsCreate("button", listItemsLength);
 
   for (let i = 0; i < listItemsLength; i++) {
-    itemsButton[i].textContent = listItems[i].Title;
+    returnedTaskItem = checkReturnedObject(listItems[i], "task");
+    itemsButton[i].textContent = returnedTaskItem.Title;
     itemsButton[i].addEventListener("click", () => {
-      renderTaskDetails(listItems[i]);
+      renderTaskDetails(returnedTaskItem);
     });
-    itemsPriority[i].textContent = listItems[i].Priority;
-    itemsPriority[i].dataset.priority = listItems[i].Priority;
-    itemsDate[i].textContent = listItems[i].DueDate;
-    if (listItems[i].CompleteStatus === false) {
+    itemsPriority[i].textContent = returnedTaskItem.Priority;
+    itemsPriority[i].dataset.priority = returnedTaskItem.Priority;
+    itemsDate[i].textContent = returnedTaskItem.DueDate;
+    if (returnedTaskItem.CompleteStatus === false) {
       completeStatusButtons[i].textContent = "Complete";
-    } else if (listItems[i].CompleteStatus === true) {
+    } else if (returnedTaskItem.CompleteStatus === true) {
       completeStatusButtons[i].textContent = "Incomplete";
     }
     completeStatusButtons[i].addEventListener("click", () => {
-      completeTaskProcess(listItems[i].CompleteStatus, listItems[i]);
+      completeTaskProcess(returnedTaskItem.CompleteStatus, returnedTaskItem);
       renderMainListsDetails(id);
     });
     itemsLi[i].append(

@@ -1,11 +1,13 @@
-import { completeTask } from "./mainTasksComplete.js";
-import { deCompleteTask } from "./mainTasksIncomplete.js";
+import {
+  toggleCompleteStatus,
+  toggleIncompleteStatus,
+} from "./mainTasksStatusToggle.js";
 
 function completeTaskProcess(status, task) {
   if (status === false) {
-    completeTask(task);
+    toggleCompleteStatus(task);
   } else if (status === true) {
-    deCompleteTask(task);
+    toggleIncompleteStatus(task);
   }
 }
 

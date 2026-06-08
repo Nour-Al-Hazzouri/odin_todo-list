@@ -47,7 +47,7 @@ function submitTaskForm(target) {
       let returnedList;
       for (let i = 0; i < returnedListIds.length; i++) {
         returnedList = checkReturnedObject(returnedListIds[i], "list");
-        returnedList.appendTaskItem(createdTaskObject);
+        returnedList.appendTaskItem(createdTaskObject.id);
       }
       syncListObjects();
     }

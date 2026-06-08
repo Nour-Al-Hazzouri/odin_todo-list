@@ -5,7 +5,7 @@ function appendTasksToList(list, tasks) {
   let counter = 0;
   for (const taskItem of taskItems) {
     if (taskItem.id === tasks[counter]) {
-      list.appendTaskItem(taskItem);
+      list.appendTaskItem(taskItem.id);
       counter += 1;
     }
   }

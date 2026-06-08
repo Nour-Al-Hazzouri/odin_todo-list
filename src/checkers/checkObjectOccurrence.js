@@ -5,8 +5,8 @@ function checkObjectOccurrence(list, taskItem) {
   if (!checkInstanceConditionOf(list, taskItem)) {
     throw Error("Can't check object occurrence");
   } else {
-    for (const listItem of list.Items) {
-      if (listItem.id === taskItem.id) {
+    for (let i = 0; i < list.Items.length; i++) {
+      if (list.Items[i] === taskItem.id) {
         return true;
       }
     }

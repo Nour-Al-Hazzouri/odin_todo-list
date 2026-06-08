@@ -123,6 +123,7 @@ function refreshListItems() {
 }
 
 function refreshListsRemovedTasks(id) {
+  let currentReturnedTask;
   const emptyMessage = document.createElement("p");
   emptyMessage.textContent = "No Added Tasks";
   const listItemsDiv = document.querySelector("#list-items");
@@ -138,11 +139,12 @@ function refreshListsRemovedTasks(id) {
   const tasksDivs = elementsCreate("div", listItemsLength);
   for (let i = 0; i < listItemsLength; i++) {
     listOptions[i].setAttribute("type", "checkbox");
-    listOptions[i].value = listItems[i].id;
+    listOptions[i].value = listItems[i];
     listOptions[i].name = "task";
     listOptions[i].id = `task-${i}`;
     labelOptions[i].setAttribute("for", `task-${i}`);
-    labelOptions[i].textContent = listItems[i].Title;
+    currentReturnedTask = checkReturnedObject(listItems[i], "task");
+    labelOptions[i].textContent = currentReturnedTask.Title;
     tasksDivs[i].append(listOptions[i], labelOptions[i]);
     listItemsDiv.append(tasksDivs[i]);
   }

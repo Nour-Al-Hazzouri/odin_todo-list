@@ -47,11 +47,11 @@ function saveObject(passedObject) {
   if (checkInstanceOf(passedObject) === "task") {
     taskObjectsArray.push(passedObject);
     // Default must have all TODO Items
-    listObjectsArray[0].appendTaskItem(passedObject);
+    listObjectsArray[0].appendTaskItem(passedObject.id);
     if (isToday(passedObject.DueDate)) {
-      listObjectsArray[1].appendTaskItem(passedObject);
+      listObjectsArray[1].appendTaskItem(passedObject.id);
     } else if (isThisWeek(passedObject.DueDate)) {
-      listObjectsArray[2].appendTaskItem(passedObject);
+      listObjectsArray[2].appendTaskItem(passedObject.id);
     }
     syncTaskObjects();
     syncListObjects();
