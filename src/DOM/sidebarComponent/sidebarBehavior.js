@@ -12,7 +12,7 @@ function collapseSidebar() {
   aside.classList.remove("aside-expanded");
   aside.classList.add("aside-collapsed");
   main.classList.add("main-expanded");
-  main.classList.remove('main-collapsed');
+  main.classList.remove("main-collapsed");
   for (let i = 0; i < sidebarSections.length; i++) {
     sidebarSections[i].classList.add("display-none");
   }
@@ -26,8 +26,8 @@ function collapseSidebar() {
 function expandSidebar() {
   aside.classList.remove("aside-collapsed");
   aside.classList.add("aside-expanded");
-  main.classList.add('main-collapsed');
-  main.classList.remove('main-expanded');
+  main.classList.add("main-collapsed");
+  main.classList.remove("main-expanded");
 
   for (let i = 0; i < sidebarSections.length; i++) {
     sidebarSections[i].classList.remove("display-none");

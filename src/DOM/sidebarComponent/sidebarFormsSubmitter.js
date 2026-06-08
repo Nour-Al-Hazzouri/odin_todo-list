@@ -12,7 +12,10 @@ import checkInstanceOf from "../../checkers/checkInstanceOfObject.js";
 import checkObjectOccurrence from "../../checkers/checkObjectOccurrence.js";
 import checkReturnedObject from "../../checkers/checkReturnedObject.js";
 import { isThisWeek, isToday } from "date-fns";
-import { getListObjects, syncListObjects } from "../../objectsComponents/centralObjectsStorage.js";
+import {
+  getListObjects,
+  syncListObjects,
+} from "../../objectsComponents/centralObjectsStorage.js";
 
 function submitListForm(target) {
   const transformedList = Object.fromEntries(target);

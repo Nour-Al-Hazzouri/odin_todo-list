@@ -21,7 +21,7 @@ function completeTask(task) {
   const todaysList = allListItems[1];
   const thisWeeksList = allListItems[2];
   const completedList = allListItems[3];
-  
+
   for (let i = 0; i < listItemsCount; i++) {
     if (i === 0) {
       continue;
@@ -33,7 +33,7 @@ function completeTask(task) {
   }
   appendTodoToList(completedList, task);
   task.setCompleteStatus = true;
-  syncTodoObjects()
+  syncTodoObjects();
   syncListObjects();
   refreshListItems();
   refreshCreateListItems();

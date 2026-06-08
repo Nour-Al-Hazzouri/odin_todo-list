@@ -23,9 +23,9 @@ function createTaskForm() {
   const clearForm = document.createElement("button");
   const taskH3 = document.createElement("h3");
   taskH3.textContent = "Add to List";
-  taskH3.classList.add("dialogs-h3")
+  taskH3.classList.add("dialogs-h3");
   const listsContainer = document.createElement("div");
-  listsContainer.id = "lists-container"
+  listsContainer.id = "lists-container";
   listsContainer.classList.add("dialogs-list");
   todoForm.setAttribute("method", "dialog");
 

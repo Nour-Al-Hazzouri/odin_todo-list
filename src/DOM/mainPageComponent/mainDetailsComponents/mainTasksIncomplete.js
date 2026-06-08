@@ -21,7 +21,7 @@ function deCompleteTask(task) {
   const todaysList = allListItems[1];
   const thisWeeksList = allListItems[2];
   const completedList = allListItems[3];
-  
+
   if (isToday(task.DueDate && checkObjectOccurrence(todaysList, task))) {
     todaysList.appendTodoItem(task);
   } else if (
@@ -31,8 +31,8 @@ function deCompleteTask(task) {
     thisWeeksList.appendTodoItem(task);
   }
   removeFromList(completedList, task);
-  task.setCompleteStatus = false
-  syncTodoObjects()
+  task.setCompleteStatus = false;
+  syncTodoObjects();
   syncListObjects();
   refreshListItems();
   refreshCreateListItems();

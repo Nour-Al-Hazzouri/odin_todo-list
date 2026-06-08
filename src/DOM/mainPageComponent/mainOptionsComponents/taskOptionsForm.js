@@ -1,7 +1,7 @@
 import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
 import elementsCreate from "../../elementsCreator.js";
 import { setLabelAttributes } from "../../toggleAttribute.js";
-import { refreshListItems } from '../../sidebarComponent/sidebarRefreshComponents.js';
+import { refreshListItems } from "../../sidebarComponent/sidebarRefreshComponents.js";
 
 let passedTask;
 

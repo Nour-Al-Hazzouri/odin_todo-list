@@ -32,7 +32,7 @@ function removeFromList(list, todoObject) {
     throw Error("Check List and Task objects");
   } else {
     if (checkObjectOccurrence(list, todoObject)) {
-      if (list.Name === 'Default') {
+      if (list.Name === "Default") {
         deleteTodoObject(todoObject);
         syncTodoObjects();
         for (let i = 0; i < listItemsCount; i++) {

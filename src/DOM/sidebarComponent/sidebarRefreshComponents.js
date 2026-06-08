@@ -191,7 +191,7 @@ function refreshListsAddTasks(id) {
       listItemsDiv.append(tasksDivs[i]);
     }
   }
-   if (listItemsDiv.childElementCount === 0) {
+  if (listItemsDiv.childElementCount === 0) {
     emptyMessage.textContent = "No Tasks to Add";
     listItemsDiv.append(emptyMessage);
   }

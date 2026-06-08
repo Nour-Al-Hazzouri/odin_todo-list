@@ -23,7 +23,7 @@ if (fetchTodos) {
 if (fetchLists) {
   const listParse = JSON.parse(fetchLists);
   listObjectsArray = listParse.map((object) =>
-    ListObjectsFactory.fromJSON(object, todoObjectsArray)
+    ListObjectsFactory.fromJSON(object, todoObjectsArray),
   );
 } else {
   // Only use defaults if "listObjectsArray" key is missing from storage entirely

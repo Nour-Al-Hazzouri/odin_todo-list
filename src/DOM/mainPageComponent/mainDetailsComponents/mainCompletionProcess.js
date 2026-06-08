@@ -2,11 +2,11 @@ import { completeTask } from "./mainTasksComplete.js";
 import { deCompleteTask } from "./mainTasksIncomplete.js";
 
 function completeTaskProcess(status, task) {
-if (status === false) {
+  if (status === false) {
     completeTask(task);
-} else if (status === true) {
+  } else if (status === true) {
     deCompleteTask(task);
-}
+  }
 }
 
 export { completeTaskProcess };
