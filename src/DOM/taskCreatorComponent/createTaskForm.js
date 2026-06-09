@@ -6,10 +6,10 @@ import {
 import { refreshListItems } from "../sidebarComponent/sidebarRefreshComponents.js";
 import { submitTaskForm } from "../sidebarComponent/sidebarFormsSubmitter.js";
 
-const todoForm = document.createElement("form");
+const taskForm = document.createElement("form");
 
 function createTaskForm() {
-  const todoSelect = document.createElement("select");
+  const taskSelect = document.createElement("select");
   const submitForm = document.createElement("button");
   const clearForm = document.createElement("button");
   const taskH3 = document.createElement("h3");
@@ -18,7 +18,7 @@ function createTaskForm() {
   const listsContainer = document.createElement("div");
   listsContainer.id = "lists-container";
   listsContainer.classList.add("dialogs-list");
-  todoForm.setAttribute("method", "dialog");
+  taskForm.setAttribute("method", "dialog");
 
   // Tasks labels
   setLabelAttributes(taskLabel[0], "Title", "title");
@@ -31,14 +31,14 @@ function createTaskForm() {
   // Text
   for (let i = 0; i < 3; i++) {
     taskInput[i].setAttribute("type", "text");
-    todoForm.append(taskLabel[i], taskInput[i]);
+    taskForm.append(taskLabel[i], taskInput[i]);
   }
   // Date
   taskInput[3].setAttribute("type", "date");
-  todoForm.append(taskLabel[3], taskInput[3]);
+  taskForm.append(taskLabel[3], taskInput[3]);
   // Options
-  todoSelect.setAttribute("id", "priority");
-  todoSelect.setAttribute("name", "priority");
+  taskSelect.setAttribute("id", "priority");
+  taskSelect.setAttribute("name", "priority");
   taskOptions[0].setAttribute("value", "low");
   taskOptions[1].setAttribute("value", "medium");
   taskOptions[2].setAttribute("value", "high");
@@ -64,24 +64,24 @@ function createTaskForm() {
   submitForm.setAttribute("type", "submit");
   clearForm.textContent = "Clear";
   clearForm.setAttribute("type", "reset");
-  todoForm.id = "task-form";
+  taskForm.id = "task-form";
 
   // Append elements accordingly
   for (let i = 0; i < 3; i++) {
-    todoSelect.append(taskOptions[i]);
+    taskSelect.append(taskOptions[i]);
   }
-  todoForm.append(
+  taskForm.append(
     taskLabel[4],
-    todoSelect,
+    taskSelect,
     taskH3,
     listsContainer,
     submitForm,
     clearForm,
   );
-  return todoForm;
+  return taskForm;
 }
 
-todoForm.addEventListener("submit", (e) => {
+taskForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
   submitTaskForm(formData);

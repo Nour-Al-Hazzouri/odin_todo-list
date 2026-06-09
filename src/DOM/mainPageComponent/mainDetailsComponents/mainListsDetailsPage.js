@@ -4,43 +4,47 @@ import { main } from "../../../universalQueries.js";
 import renderTaskDetails from "./tasksDetailsDialogs.js";
 import removeMainSections from "../../removeMainSections.js";
 import { completeTaskProcess } from "./mainCompletionProcess.js";
+import {
+  checkListItems,
+  returnedList,
+  listItems,
+  listLength,
+} from "../../../checkers/checkListItems.js";
+import { noCurrentTasksMessage } from "../../sidebarComponent/emptyObjects.js";
 
 function renderMainListsDetails(id) {
   removeMainSections();
-  const emptyMessage = document.createElement("p");
-  emptyMessage.textContent = "No Current Tasks";
-  const passedList = checkReturnedObject(id, "list");
-  const listItems = passedList.Items;
-  const listItemsLength = passedList.Items.length;
+  checkListItems(id);
   const mainListSection = document.createElement("section");
   mainListSection.id = "list-details";
   const mainListH1 = document.createElement("h1");
   mainListH1.textContent = "List Details";
   const mainListName = document.createElement("h2");
-  mainListName.textContent = passedList.Name;
+  mainListName.textContent = returnedList.Name;
   const listItemsContainer = document.createElement("div");
   const listItemsUl = document.createElement("ul");
-  const itemsLi = elementsCreate("li", listItemsLength);
-  const itemsButton = elementsCreate("button", listItemsLength);
-  const itemsPriority = elementsCreate("p", listItemsLength);
-  const itemsDate = elementsCreate("p", listItemsLength);
-  const completeStatusButtons = elementsCreate("button", listItemsLength);
+  const itemsLi = elementsCreate("li", listLength);
+  const itemsButton = elementsCreate("button", listLength);
+  const itemsPriority = elementsCreate("p", listLength);
+  const itemsDate = elementsCreate("p", listLength);
+  const completeStatusButtons = elementsCreate("button", listLength);
 
-  for (let i = 0; i < listItemsLength; i++) {
-    itemsButton[i].textContent = listItems[i].Title;
+  for (let i = 0; i < listLength; i++) {
+    const returnedTaskItem = checkReturnedObject(listItems[i], "task");
+    itemsButton[i].textContent = returnedTaskItem.Title;
     itemsButton[i].addEventListener("click", () => {
-      renderTaskDetails(listItems[i]);
+      renderTaskDetails(returnedTaskItem);
     });
-    itemsPriority[i].textContent = listItems[i].Priority;
-    itemsPriority[i].dataset.priority = listItems[i].Priority;
-    itemsDate[i].textContent = listItems[i].DueDate;
-    if (listItems[i].CompleteStatus === false) {
+    itemsPriority[i].textContent = returnedTaskItem.Priority;
+    itemsPriority[i].dataset.priority = returnedTaskItem.Priority;
+    itemsDate[i].textContent = returnedTaskItem.DueDate;
+    if (returnedTaskItem.CompleteStatus === false) {
       completeStatusButtons[i].textContent = "Complete";
-    } else if (listItems[i].CompleteStatus === true) {
+    } else if (returnedTaskItem.CompleteStatus === true) {
       completeStatusButtons[i].textContent = "Incomplete";
     }
     completeStatusButtons[i].addEventListener("click", () => {
-      completeTaskProcess(listItems[i].CompleteStatus, listItems[i]);
+      completeTaskProcess(returnedTaskItem.CompleteStatus, returnedTaskItem);
       renderMainListsDetails(id);
     });
     itemsLi[i].append(
@@ -53,8 +57,8 @@ function renderMainListsDetails(id) {
   }
   listItemsContainer.append(listItemsUl);
   mainListSection.append(mainListH1, mainListName, listItemsContainer);
-  if (listItemsLength === 0) {
-    mainListSection.append(emptyMessage);
+  if (listLength === 0) {
+    mainListSection.append(noCurrentTasksMessage);
   }
   main.append(mainListSection);
 }

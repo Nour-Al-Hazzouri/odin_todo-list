@@ -8,7 +8,7 @@ import createListOptionsForm from "./listOptionsForm.js";
 import createTaskOptionsForm from "./taskOptionsForm.js";
 import { deleteObject } from "../../../objectsComponents/centralObjectsStorage.js";
 import {
-  appendTodoToList,
+  appendTaskToList,
   removeFromList,
 } from "../../../objectsComponents/objectsManipulation.js";
 import removeMainSections from "../../removeMainSections.js";
@@ -54,7 +54,7 @@ function renderTaskOptions(id) {
 function removeSelectedTasks(passedList, formData) {
   let selectedObject;
   for (let i = 0; i < formData.length; i++) {
-    selectedObject = checkReturnedObject(formData[i], "todo");
+    selectedObject = checkReturnedObject(formData[i], "task");
     removeFromList(passedList, selectedObject);
   }
   refreshCreateListItems();
@@ -63,8 +63,8 @@ function removeSelectedTasks(passedList, formData) {
 function addSelectedTasks(passedList, formData) {
   let selectedObject;
   for (let i = 0; i < formData.length; i++) {
-    selectedObject = checkReturnedObject(formData[i], "todo");
-    appendTodoToList(passedList, selectedObject);
+    selectedObject = checkReturnedObject(formData[i], "task");
+    appendTaskToList(passedList, selectedObject);
   }
 }
 

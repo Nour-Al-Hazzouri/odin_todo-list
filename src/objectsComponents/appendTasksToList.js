@@ -1,11 +1,12 @@
-import { getTodoObjects, syncListObjects } from "./centralObjectsStorage.js";
+import { syncListObjects } from "./centralObjectsStorage.js";
+import { getAllTasks, allTaskItems } from "../checkers/checkTaskItems.js";
 
 function appendTasksToList(list, tasks) {
-  const taskItems = getTodoObjects();
+  getAllTasks();
   let counter = 0;
-  for (const taskItem of taskItems) {
+  for (const taskItem of allTaskItems) {
     if (taskItem.id === tasks[counter]) {
-      list.appendTodoItem(taskItem);
+      list.appendTaskItem(taskItem.id);
       counter += 1;
     }
   }

@@ -8,6 +8,14 @@ Fourth project of TOP's Javascript course, Full Stack Javascript path. The idea 
 
 After my 1-month, 1-week of work, I've completed `V1` of this project. It consists of having a functional to-do list webapp. I've precisely mentioned `V1` because the code isn't as clean as I had hoped for, and SOLID principles aren't as enforced as I decided. So I'm considering a refactor later which should be `V2`.
 
+## V2
+
+**9/6/2026**
+
+This `V2` consists of having a cleaner codebase. It is the result of me reflecting upon my code and figuring out ways to improve it.
+
+**- AI-assissted**
+
 ---
 
 ## Project Architecture
@@ -23,6 +31,7 @@ During my 1-month, 1-week duration of work, this is the structure I chose for th
   - `./src/DOM`: DOM-manipulation. Everything under it is related to creating visual components and appending them accordingly.
     - `./src/DOM/listCreatorComponent`: dialog and form responsible for creating lists.
     - `./src/DOM/taskCreatorComponent`: dialog and form responsible for creating tasks.
+    - `./src/DOM/sidebarComponent`: components, logic, and layout handling for the sidebar section.
     - `./src/DOM/mainPageComponent`: all elements that will be rendered in the `main` element
       - `./src/DOM/mainPageComponent/mainOptionsComponents`: options components rendered in the `main` element
       - `./src/DOM/mainPageComponent/mainDetailsComponents`: details components rendered in the `main` element

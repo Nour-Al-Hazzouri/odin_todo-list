@@ -1,19 +1,23 @@
 import checkInstanceConditionOf from "../checkers/checkInstanceCondition.js";
 import checkObjectOccurrence from "../checkers/checkObjectOccurrence.js";
 import {
-  deleteTodoObject,
-  getListObjects,
+  deleteTaskObject,
   syncListObjects,
-  syncTodoObjects,
+  syncTaskObjects,
 } from "./centralObjectsStorage.js";
+import {
+  getAllLists,
+  allLists,
+  allListsCount,
+} from "../checkers/checkListItems.js";
 
 // Add Tasks in Lists dynamically
-function appendTodoToList(list, todoObject) {
-  if (!checkInstanceConditionOf(list, todoObject)) {
+function appendTaskToList(list, taskObject) {
+  if (!checkInstanceConditionOf(list, taskObject)) {
     throw Error("Can't append to list. Check list and object.");
   } else {
-    if (!checkObjectOccurrence(list, todoObject)) {
-      list.appendTodoItem(todoObject);
+    if (!checkObjectOccurrence(list, taskObject)) {
+      list.appendTaskItem(taskObject.id);
       syncListObjects();
     } else {
       throw Error("Item already in list.");
@@ -22,22 +26,21 @@ function appendTodoToList(list, todoObject) {
 }
 
 // remove Tasks from Lists dynamically
-function removeFromList(list, todoObject) {
-  const listItems = getListObjects();
-  const listItemsCount = listItems.length;
+function removeFromList(list, taskObject) {
+  getAllLists();
 
-  if (!checkInstanceConditionOf(list, todoObject)) {
+  if (!checkInstanceConditionOf(list, taskObject)) {
     throw Error("Check List and Task objects");
   } else {
-    if (checkObjectOccurrence(list, todoObject)) {
+    if (checkObjectOccurrence(list, taskObject)) {
       if (list.Name === "Default") {
-        deleteTodoObject(todoObject);
-        syncTodoObjects();
-        for (let i = 0; i < listItemsCount; i++) {
-          listItems[i].removeTodoItem(todoObject);
+        deleteTaskObject(taskObject);
+        syncTaskObjects();
+        for (let i = 0; i < allListsCount; i++) {
+          allLists[i].removeTaskItem(taskObject.id);
         }
       } else {
-        list.removeTodoItem(todoObject);
+        list.removeTaskItem(taskObject.id);
       }
       syncListObjects();
     } else {
@@ -46,4 +49,4 @@ function removeFromList(list, todoObject) {
   }
 }
 
-export { appendTodoToList, removeFromList };
+export { appendTaskToList, removeFromList };

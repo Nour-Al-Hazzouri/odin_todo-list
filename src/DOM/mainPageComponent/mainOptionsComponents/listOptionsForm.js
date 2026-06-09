@@ -1,5 +1,5 @@
 import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
-import { getListObjects } from "../../../objectsComponents/centralObjectsStorage.js";
+import { getAllLists, allLists } from "../../../checkers/checkListItems.js";
 import {
   refreshListItems,
   refreshListsAddTasks,
@@ -60,9 +60,9 @@ function createListOptionsForm(id) {
 function activateEventListener(listForm) {
   listForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const taskItems = getListObjects();
+    getAllLists();
     const formData = new FormData(e.target);
-    if (!taskItems[0] || !taskItems[1] || !taskItems[2] || !taskItems[3]) {
+    if (!allLists[0] || !allLists[1] || !allLists[2] || !allLists[3]) {
       passedList.setName = formData.get("list-name");
     }
     if (formData.getAll("task")) {
@@ -74,6 +74,7 @@ function activateEventListener(listForm) {
       const allSelectedTasks = formData.getAll("add-task");
       addSelectedTasks(passedList, allSelectedTasks);
       refreshListsAddTasks(passedList.id);
+      refreshListsRemovedTasks(passedList.id);
     }
     refreshListItems();
   });
