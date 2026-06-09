@@ -1,27 +1,27 @@
-import TodoObjectsFactory from "../objectsFactories/TodoObjectsFactory.js";
+import TaskObjectsFactory from "../objectsFactories/TaskObjectsFactory.js";
 import ListObjectsFactory from "../objectsFactories/ListObjectsFactory.js";
 import checkInstanceOf from "../checkers/checkInstanceOfObject.js";
 import { isThisWeek, isToday } from "date-fns";
 
-let todoObjectsArray = [];
+let taskObjectsArray = [];
 let listObjectsArray = [];
 
 const fetchLists = localStorage.getItem("listObjectsArray");
-const fetchTodos = localStorage.getItem("todoObjectsArray");
+const fetchTasks = localStorage.getItem("taskObjectsArray");
 
-if (fetchTodos) {
-  const taskParse = JSON.parse(fetchTodos);
-  todoObjectsArray = taskParse.map((object) =>
-    TodoObjectsFactory.fromJSON(object),
+if (fetchTasks) {
+  const taskParse = JSON.parse(fetchTasks);
+  taskObjectsArray = taskParse.map((object) =>
+    TaskObjectsFactory.fromJSON(object),
   );
 } else {
-  todoObjectsArray = [];
+  taskObjectsArray = [];
 }
 
 if (fetchLists) {
   const listParse = JSON.parse(fetchLists);
   listObjectsArray = listParse.map((object) =>
-    ListObjectsFactory.fromJSON(object, todoObjectsArray),
+    ListObjectsFactory.fromJSON(object, taskObjectsArray),
   );
 } else {
   // Only use defaults if "listObjectsArray" key is missing from storage entirely
@@ -37,23 +37,23 @@ function syncListObjects() {
   const savedListsUpdates = JSON.stringify(listObjectsArray);
   localStorage.setItem("listObjectsArray", savedListsUpdates);
 }
-function syncTodoObjects() {
-  const savedTodoUpdates = JSON.stringify(todoObjectsArray);
-  localStorage.setItem("todoObjectsArray", savedTodoUpdates);
+function syncTaskObjects() {
+  const savedTaskUpdates = JSON.stringify(taskObjectsArray);
+  localStorage.setItem("taskObjectsArray", savedTaskUpdates);
 }
 
 // Push object based on type
 function saveObject(passedObject) {
-  if (checkInstanceOf(passedObject) === "todo") {
-    todoObjectsArray.push(passedObject);
+  if (checkInstanceOf(passedObject) === "task") {
+    taskObjectsArray.push(passedObject);
     // Default must have all TODO Items
-    listObjectsArray[0].appendTodoItem(passedObject);
+    listObjectsArray[0].appendTaskItem(passedObject.id);
     if (isToday(passedObject.DueDate)) {
-      listObjectsArray[1].appendTodoItem(passedObject);
+      listObjectsArray[1].appendTaskItem(passedObject.id);
     } else if (isThisWeek(passedObject.DueDate)) {
-      listObjectsArray[2].appendTodoItem(passedObject);
+      listObjectsArray[2].appendTaskItem(passedObject.id);
     }
-    syncTodoObjects();
+    syncTaskObjects();
     syncListObjects();
   } else if (checkInstanceOf(passedObject) === "list") {
     listObjectsArray.push(passedObject);
@@ -79,24 +79,24 @@ function deleteObject(passedObject) {
   }
 }
 
-function getTodoObjects() {
-  return todoObjectsArray;
+function getTaskObjects() {
+  return taskObjectsArray;
 }
 function getListObjects() {
   return listObjectsArray;
 }
 
-function deleteTodoObject(todoObject) {
-  todoObjectsArray.splice(todoObjectsArray.indexOf(todoObject), 1);
-  syncTodoObjects();
+function deleteTaskObject(taskObject) {
+  taskObjectsArray.splice(taskObjectsArray.indexOf(taskObject), 1);
+  syncTaskObjects();
 }
 
 export {
   saveObject,
-  getTodoObjects,
+  getTaskObjects,
   getListObjects,
   deleteObject,
-  deleteTodoObject,
+  deleteTaskObject,
   syncListObjects,
-  syncTodoObjects,
+  syncTaskObjects,
 };

@@ -1,5 +1,3 @@
-import TodoObjectsFactory from "./TodoObjectsFactory.js";
-
 class ListObjectsFactory {
   #id;
   #name;
@@ -26,7 +24,7 @@ class ListObjectsFactory {
     ) {
       this.#name = name;
     } else {
-      throw Error("Cannot use term 'default' as name.");
+      throw Error("Cannot use defaults as names.");
     }
   }
   get Name() {
@@ -39,12 +37,12 @@ class ListObjectsFactory {
     return this.#id;
   }
 
-  appendTodoItem(passedTodoItem) {
-    this.#items.push(passedTodoItem);
+  appendTaskItem(passedTaskItemId) {
+    this.#items.push(passedTaskItemId);
   }
-  removeTodoItem(passedTodoItem) {
+  removeTaskItem(passedTaskItemId) {
     // 1. Find the index first
-    const index = this.#items.indexOf(passedTodoItem);
+    const index = this.#items.indexOf(passedTaskItemId);
     // 2. Only splice IF the index is NOT -1
     if (index !== -1) {
       this.#items.splice(index, 1);
@@ -58,22 +56,15 @@ class ListObjectsFactory {
       items: this.#items,
     };
   }
-  static fromJSON(data, globalTodos = []) {
+  static fromJSON(data) {
     const instance = new ListObjectsFactory(data.name);
     instance.#id = data.id;
 
     if (data.items) {
-      instance.#items = data.items.map((item) => {
-        // Link the reference from the global tasks
-        const existingTaskReference = globalTodos.find(
-          (globalTask) => globalTask.id === item.id,
-        );
-
-        // Return existing reference or fallback to creating a new one
-        return existingTaskReference || TodoObjectsFactory.fromJSON(item);
-      });
+      instance.#items = data.items.map((item) =>
+        typeof item === "object" && item !== null ? item.id : item,
+      );
     }
-
     return instance;
   }
 }

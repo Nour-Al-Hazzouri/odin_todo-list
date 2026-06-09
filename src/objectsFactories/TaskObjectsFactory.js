@@ -1,5 +1,5 @@
 // Create TODO items per required fields.
-class TodoObjectsFactory {
+class TaskObjectsFactory {
   #id;
   #title;
   #description;
@@ -83,7 +83,7 @@ class TodoObjectsFactory {
   }
 
   static fromJSON(object) {
-    const instance = new TodoObjectsFactory(
+    const instance = new TaskObjectsFactory(
       object.title,
       object.description,
       object.dueDate,
@@ -96,4 +96,4 @@ class TodoObjectsFactory {
   }
 }
 
-export default TodoObjectsFactory;
+export default TaskObjectsFactory;

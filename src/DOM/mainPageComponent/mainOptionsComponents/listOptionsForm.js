@@ -1,5 +1,5 @@
 import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
-import { getListObjects } from "../../../objectsComponents/centralObjectsStorage.js";
+import { getAllLists } from "../../../checkers/checkListItems.js";
 import {
   refreshListItems,
   refreshListsAddTasks,
@@ -7,6 +7,7 @@ import {
 } from "../../sidebarComponent/sidebarRefreshComponents.js";
 import { setLabelAttributes } from "../../toggleAttribute.js";
 import { addSelectedTasks, removeSelectedTasks } from "./mainOptionsPage.js";
+import { syncListObjects } from "../../../objectsComponents/centralObjectsStorage.js";
 
 let passedList;
 
@@ -60,10 +61,16 @@ function createListOptionsForm(id) {
 function activateEventListener(listForm) {
   listForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const taskItems = getListObjects();
+    getAllLists();
     const formData = new FormData(e.target);
-    if (!taskItems[0] || !taskItems[1] || !taskItems[2] || !taskItems[3]) {
+    if (
+      passedList.Name !== "Default" &&
+      passedList.Name !== "Today" &&
+      passedList.Name !== "This Week" &&
+      passedList.Name !== "Completed"
+    ) {
       passedList.setName = formData.get("list-name");
+      syncListObjects();
     }
     if (formData.getAll("task")) {
       const allSelectedTasks = formData.getAll("task");
@@ -74,6 +81,7 @@ function activateEventListener(listForm) {
       const allSelectedTasks = formData.getAll("add-task");
       addSelectedTasks(passedList, allSelectedTasks);
       refreshListsAddTasks(passedList.id);
+      refreshListsRemovedTasks(passedList.id);
     }
     refreshListItems();
   });
