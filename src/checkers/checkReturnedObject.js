@@ -1,20 +1,18 @@
-import {
-  getListObjects,
-  getTaskObjects,
-} from "../objectsComponents/centralObjectsStorage.js";
+import { getAllLists, allLists } from "./checkListItems.js";
+import { getAllTasks, allTaskItems } from "./checkTaskItems.js";
 
 // Return object based on type and id
 function checkReturnedObject(passedId, objectType) {
-  const listObjects = getListObjects();
-  const taskObjects = getTaskObjects();
+  getAllLists();
+  getAllTasks();
   if (objectType === "task") {
-    for (const taskObject of taskObjects) {
+    for (const taskObject of allTaskItems) {
       if (passedId === taskObject.id) {
         return taskObject;
       }
     }
   } else if (objectType === "list") {
-    for (const listObject of listObjects) {
+    for (const listObject of allLists) {
       if (passedId === listObject.id) {
         return listObject;
       }

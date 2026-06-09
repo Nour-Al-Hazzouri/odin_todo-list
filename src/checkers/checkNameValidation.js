@@ -1,17 +1,14 @@
-import {
-  getListObjects,
-  getTaskObjects,
-} from "../objectsComponents/centralObjectsStorage.js";
+import { getAllLists, allLists, allListsCount } from "./checkListItems.js";
+import { getAllTasks, allTaskItems, taskItemsCount } from "./checkTaskItems.js";
 
 // Check if same `List` name is used
 function checkListNameDuplicate(name) {
-  const listItems = getListObjects();
-  const listItemsCount = getListObjects().length;
+  getAllLists();
   if (!name) {
     throw Error("Ensure you correctly passed list name");
   } else {
-    for (let i = 0; i < listItemsCount; i++) {
-      if (listItems[i].Name == name) {
+    for (let i = 0; i < allListsCount; i++) {
+      if (allLists[i].Name == name) {
         return true;
       }
     }
@@ -21,13 +18,12 @@ function checkListNameDuplicate(name) {
 
 // Check if `Task` name is used
 function checkTaskNameDuplicate(name) {
-  const taskItems = getTaskObjects();
-  const taskItemsCount = getTaskObjects().length;
+  getAllTasks();
   if (!name) {
     throw Error("Ensure you correctly passed task name");
   } else {
     for (let i = 0; i < taskItemsCount; i++) {
-      if (taskItems[i].Title == name) {
+      if (allTaskItems[i].Title == name) {
         return true;
       }
     }
@@ -37,11 +33,11 @@ function checkTaskNameDuplicate(name) {
 
 // Prohibit usage of certain names
 function validateListName(name) {
-  const listItemsCount = getListObjects().length;
+  getAllLists();
   if (!name) {
     throw Error("Ensure you correctly passed list name");
   } else {
-    for (let i = 0; i < listItemsCount; i++) {
+    for (let i = 0; i < allListsCount; i++) {
       if (name === "Default" || name === "default") {
         return true;
       }
