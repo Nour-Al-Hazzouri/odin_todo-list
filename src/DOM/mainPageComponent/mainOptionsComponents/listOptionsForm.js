@@ -1,5 +1,5 @@
 import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
-import { getAllLists, allLists } from "../../../checkers/checkListItems.js";
+import { getAllLists } from "../../../checkers/checkListItems.js";
 import {
   refreshListItems,
   refreshListsAddTasks,
@@ -7,6 +7,7 @@ import {
 } from "../../sidebarComponent/sidebarRefreshComponents.js";
 import { setLabelAttributes } from "../../toggleAttribute.js";
 import { addSelectedTasks, removeSelectedTasks } from "./mainOptionsPage.js";
+import { syncListObjects } from "../../../objectsComponents/centralObjectsStorage.js";
 
 let passedList;
 
@@ -62,8 +63,14 @@ function activateEventListener(listForm) {
     e.preventDefault();
     getAllLists();
     const formData = new FormData(e.target);
-    if (!allLists[0] || !allLists[1] || !allLists[2] || !allLists[3]) {
+    if (
+      passedList.Name !== "Default" &&
+      passedList.Name !== "Today" &&
+      passedList.Name !== "This Week" &&
+      passedList.Name !== "Completed"
+    ) {
       passedList.setName = formData.get("list-name");
+      syncListObjects();
     }
     if (formData.getAll("task")) {
       const allSelectedTasks = formData.getAll("task");
