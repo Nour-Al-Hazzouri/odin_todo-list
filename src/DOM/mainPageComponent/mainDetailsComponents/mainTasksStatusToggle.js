@@ -12,10 +12,7 @@ import {
   appendTaskToList,
   removeFromList,
 } from "../../../objectsComponents/objectsManipulation.js";
-import {
-  refreshCreateListItems,
-  refreshListItems,
-} from "../../sidebarComponent/sidebarRefreshComponents.js";
+import { refreshListItems } from "../../sidebarComponent/sidebarRefreshComponents.js";
 import { isThisWeek, isToday } from "date-fns";
 
 function toggleCompleteStatus(task) {
@@ -36,7 +33,6 @@ function toggleCompleteStatus(task) {
   syncTaskObjects();
   syncListObjects();
   refreshListItems();
-  refreshCreateListItems();
 }
 
 function toggleIncompleteStatus(task) {
@@ -58,7 +54,6 @@ function toggleIncompleteStatus(task) {
   syncTaskObjects();
   syncListObjects();
   refreshListItems();
-  refreshCreateListItems();
 }
 
 export { toggleCompleteStatus, toggleIncompleteStatus };

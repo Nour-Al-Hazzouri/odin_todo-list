@@ -13,7 +13,6 @@ import {
 import { noCurrentTasksMessage } from "../../sidebarComponent/emptyObjects.js";
 
 function renderMainListsDetails(id) {
-  let returnedTaskItem;
   removeMainSections();
   checkListItems(id);
   const mainListSection = document.createElement("section");
@@ -31,7 +30,7 @@ function renderMainListsDetails(id) {
   const completeStatusButtons = elementsCreate("button", listLength);
 
   for (let i = 0; i < listLength; i++) {
-    returnedTaskItem = checkReturnedObject(listItems[i], "task");
+    const returnedTaskItem = checkReturnedObject(listItems[i], "task");
     itemsButton[i].textContent = returnedTaskItem.Title;
     itemsButton[i].addEventListener("click", () => {
       renderTaskDetails(returnedTaskItem);

@@ -23,8 +23,7 @@ This file documents all modules in the `src` directory and their dependencies to
 ## `DOM/mainPageComponent/mainDetailsComponents/mainCompletionProcess.js`
 
 - **Depends on:**
-  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksComplete.js`
-  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksIncomplete.js`
+  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksStatusToggle.js`
 
 ## `DOM/mainPageComponent/mainDetailsComponents/mainListsDetailsPage.js`
 
@@ -35,20 +34,15 @@ This file documents all modules in the `src` directory and their dependencies to
   - `DOM/mainPageComponent/mainDetailsComponents/tasksDetailsDialogs.js`
   - `DOM/removeMainSections.js`
   - `DOM/mainPageComponent/mainDetailsComponents/mainCompletionProcess.js`
+  - `checkers/checkListItems.js`
+  - `DOM/sidebarComponent/emptyObjects.js`
 
-## `DOM/mainPageComponent/mainDetailsComponents/mainTasksComplete.js`
-
-- **Depends on:**
-  - `checkers/checkObjectOccurrence.js`
-  - `objectsComponents/centralObjectsStorage.js`
-  - `objectsComponents/objectsManipulation.js`
-  - `DOM/sidebarComponent/sidebarRefreshComponents.js`
-
-## `DOM/mainPageComponent/mainDetailsComponents/mainTasksIncomplete.js`
+## `DOM/mainPageComponent/mainDetailsComponents/mainTasksStatusToggle.js`
 
 - **Depends on:**
   - `checkers/checkObjectOccurrence.js`
   - `objectsComponents/centralObjectsStorage.js`
+  - `checkers/checkListItems.js`
   - `objectsComponents/objectsManipulation.js`
   - `DOM/sidebarComponent/sidebarRefreshComponents.js`
   - `date-fns`
@@ -62,7 +56,7 @@ This file documents all modules in the `src` directory and their dependencies to
 
 - **Depends on:**
   - `checkers/checkReturnedObject.js`
-  - `objectsComponents/centralObjectsStorage.js`
+  - `checkers/checkListItems.js`
   - `DOM/sidebarComponent/sidebarRefreshComponents.js`
   - `DOM/toggleAttribute.js`
   - `DOM/mainPageComponent/mainOptionsComponents/mainOptionsPage.js`
@@ -91,6 +85,10 @@ This file documents all modules in the `src` directory and their dependencies to
 - _No dependencies_
 
 ## `DOM/removeMainSections.js`
+
+- _No dependencies_
+
+## `DOM/sidebarComponent/emptyObjects.js`
 
 - _No dependencies_
 
@@ -123,14 +121,16 @@ This file documents all modules in the `src` directory and their dependencies to
 ## `DOM/sidebarComponent/sidebarRefreshComponents.js`
 
 - **Depends on:**
-  - `objectsComponents/centralObjectsStorage.js`
   - `DOM/elementsCreator.js`
   - `DOM/toggleAttribute.js`
   - `DOM/removeChildren.js`
   - `DOM/mainPageComponent/mainOptionsComponents/mainOptionsPage.js`
-  - `checkers/checkReturnedObject.js`
   - `DOM/mainPageComponent/mainDetailsComponents/mainListsDetailsPage.js`
   - `checkers/checkObjectOccurrence.js`
+  - `checkers/checkListItems.js`
+  - `checkers/checkTaskItems.js`
+  - `DOM/sidebarComponent/emptyObjects.js`
+  - `checkers/checkReturnedObject.js`
 
 ## `DOM/sidebarComponent/sidebarSections.js`
 
@@ -175,16 +175,25 @@ This file documents all modules in the `src` directory and their dependencies to
   - `objectsFactories/TaskObjectsFactory.js`
   - `objectsFactories/ListObjectsFactory.js`
 
+## `checkers/checkListItems.js`
+
+- **Depends on:**
+  - `checkers/checkInstanceOfObject.js`
+  - `checkers/checkReturnedObject.js`
+  - `objectsComponents/centralObjectsStorage.js`
+
 ## `checkers/checkNameValidation.js`
 
 - **Depends on:**
-  - `objectsComponents/centralObjectsStorage.js`
+  - `checkers/checkListItems.js`
+  - `checkers/checkTaskItems.js`
 
 ## `checkers/checkObjectId.js`
 
 - **Depends on:**
-  - `objectsComponents/centralObjectsStorage.js`
   - `checkers/checkInstanceOfObject.js`
+  - `checkers/checkListItems.js`
+  - `checkers/checkTaskItems.js`
 
 ## `checkers/checkObjectOccurrence.js`
 
@@ -192,6 +201,12 @@ This file documents all modules in the `src` directory and their dependencies to
   - `checkers/checkInstanceCondition.js`
 
 ## `checkers/checkReturnedObject.js`
+
+- **Depends on:**
+  - `checkers/checkListItems.js`
+  - `checkers/checkTaskItems.js`
+
+## `checkers/checkTaskItems.js`
 
 - **Depends on:**
   - `objectsComponents/centralObjectsStorage.js`
@@ -207,6 +222,7 @@ This file documents all modules in the `src` directory and their dependencies to
 
 - **Depends on:**
   - `objectsComponents/centralObjectsStorage.js`
+  - `checkers/checkTaskItems.js`
 
 ## `objectsComponents/centralObjectsStorage.js`
 
@@ -229,11 +245,11 @@ This file documents all modules in the `src` directory and their dependencies to
   - `checkers/checkInstanceCondition.js`
   - `checkers/checkObjectOccurrence.js`
   - `objectsComponents/centralObjectsStorage.js`
+  - `checkers/checkListItems.js`
 
 ## `objectsFactories/ListObjectsFactory.js`
 
-- **Depends on:**
-  - `objectsFactories/TaskObjectsFactory.js`
+- _No dependencies_
 
 ## `objectsFactories/TaskObjectsFactory.js`
 
@@ -242,8 +258,6 @@ This file documents all modules in the `src` directory and their dependencies to
 ## `universalQueries.js`
 
 - _No dependencies_
-
----
 
 # Impact Analysis (Reverse Dependencies)
 
@@ -278,12 +292,7 @@ This section shows which modules are affected if a specific module is changed. I
 - **If modified, check these affected modules:**
   - `DOM/sidebarComponent/sidebarRefreshComponents.js`
 
-## `DOM/mainPageComponent/mainDetailsComponents/mainTasksComplete.js`
-
-- **If modified, check these affected modules:**
-  - `DOM/mainPageComponent/mainDetailsComponents/mainCompletionProcess.js`
-
-## `DOM/mainPageComponent/mainDetailsComponents/mainTasksIncomplete.js`
+## `DOM/mainPageComponent/mainDetailsComponents/mainTasksStatusToggle.js`
 
 - **If modified, check these affected modules:**
   - `DOM/mainPageComponent/mainDetailsComponents/mainCompletionProcess.js`
@@ -320,6 +329,12 @@ This section shows which modules are affected if a specific module is changed. I
   - `DOM/mainPageComponent/mainDetailsComponents/mainListsDetailsPage.js`
   - `DOM/mainPageComponent/mainOptionsComponents/mainOptionsPage.js`
 
+## `DOM/sidebarComponent/emptyObjects.js`
+
+- **If modified, check these affected modules:**
+  - `DOM/mainPageComponent/mainDetailsComponents/mainListsDetailsPage.js`
+  - `DOM/sidebarComponent/sidebarRefreshComponents.js`
+
 ## `DOM/sidebarComponent/sidebarBehavior.js`
 
 - **If modified, check these affected modules:**
@@ -347,8 +362,7 @@ This section shows which modules are affected if a specific module is changed. I
 - **If modified, check these affected modules:**
   - `DOM/listCreatorComponent/createListDialog.js`
   - `DOM/listCreatorComponent/createListForm.js`
-  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksComplete.js`
-  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksIncomplete.js`
+  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksStatusToggle.js`
   - `DOM/mainPageComponent/mainOptionsComponents/listOptionsForm.js`
   - `DOM/mainPageComponent/mainOptionsComponents/mainOptionsPage.js`
   - `DOM/taskCreatorComponent/createTaskDialog.js`
@@ -394,8 +408,21 @@ This section shows which modules are affected if a specific module is changed. I
 
 - **If modified, check these affected modules:**
   - `checkers/checkInstanceCondition.js`
+  - `checkers/checkListItems.js`
   - `checkers/checkObjectId.js`
   - `objectsComponents/centralObjectsStorage.js`
+
+## `checkers/checkListItems.js`
+
+- **If modified, check these affected modules:**
+  - `DOM/mainPageComponent/mainDetailsComponents/mainListsDetailsPage.js`
+  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksStatusToggle.js`
+  - `DOM/mainPageComponent/mainOptionsComponents/listOptionsForm.js`
+  - `DOM/sidebarComponent/sidebarRefreshComponents.js`
+  - `checkers/checkNameValidation.js`
+  - `checkers/checkObjectId.js`
+  - `checkers/checkReturnedObject.js`
+  - `objectsComponents/objectsManipulation.js`
 
 ## `checkers/checkNameValidation.js`
 
@@ -409,8 +436,7 @@ This section shows which modules are affected if a specific module is changed. I
 ## `checkers/checkObjectOccurrence.js`
 
 - **If modified, check these affected modules:**
-  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksComplete.js`
-  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksIncomplete.js`
+  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksStatusToggle.js`
   - `DOM/sidebarComponent/sidebarRefreshComponents.js`
   - `objectsComponents/objectsManipulation.js`
 
@@ -423,11 +449,21 @@ This section shows which modules are affected if a specific module is changed. I
   - `DOM/mainPageComponent/mainOptionsComponents/taskOptionsForm.js`
   - `DOM/sidebarComponent/sidebarFormsSubmitter.js`
   - `DOM/sidebarComponent/sidebarRefreshComponents.js`
+  - `checkers/checkListItems.js`
+
+## `checkers/checkTaskItems.js`
+
+- **If modified, check these affected modules:**
+  - `DOM/sidebarComponent/sidebarRefreshComponents.js`
+  - `checkers/checkNameValidation.js`
+  - `checkers/checkObjectId.js`
+  - `checkers/checkReturnedObject.js`
+  - `objectsComponents/appendTasksToList.js`
 
 ## `date-fns`
 
 - **If modified, check these affected modules:**
-  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksIncomplete.js`
+  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksStatusToggle.js`
   - `objectsComponents/centralObjectsStorage.js`
 
 ## `index.js`
@@ -442,15 +478,11 @@ This section shows which modules are affected if a specific module is changed. I
 ## `objectsComponents/centralObjectsStorage.js`
 
 - **If modified, check these affected modules:**
-  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksComplete.js`
-  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksIncomplete.js`
-  - `DOM/mainPageComponent/mainOptionsComponents/listOptionsForm.js`
+  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksStatusToggle.js`
   - `DOM/mainPageComponent/mainOptionsComponents/mainOptionsPage.js`
   - `DOM/sidebarComponent/sidebarFormsSubmitter.js`
-  - `DOM/sidebarComponent/sidebarRefreshComponents.js`
-  - `checkers/checkNameValidation.js`
-  - `checkers/checkObjectId.js`
-  - `checkers/checkReturnedObject.js`
+  - `checkers/checkListItems.js`
+  - `checkers/checkTaskItems.js`
   - `objectsComponents/appendTasksToList.js`
   - `objectsComponents/createObjects.js`
   - `objectsComponents/objectsManipulation.js`
@@ -463,8 +495,7 @@ This section shows which modules are affected if a specific module is changed. I
 ## `objectsComponents/objectsManipulation.js`
 
 - **If modified, check these affected modules:**
-  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksComplete.js`
-  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksIncomplete.js`
+  - `DOM/mainPageComponent/mainDetailsComponents/mainTasksStatusToggle.js`
   - `DOM/mainPageComponent/mainOptionsComponents/mainOptionsPage.js`
 
 ## `objectsFactories/ListObjectsFactory.js`
@@ -480,7 +511,6 @@ This section shows which modules are affected if a specific module is changed. I
   - `checkers/checkInstanceOfObject.js`
   - `objectsComponents/centralObjectsStorage.js`
   - `objectsComponents/createObjects.js`
-  - `objectsFactories/ListObjectsFactory.js`
 
 ## `styles.css`
 

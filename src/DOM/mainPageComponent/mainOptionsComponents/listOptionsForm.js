@@ -74,6 +74,7 @@ function activateEventListener(listForm) {
       const allSelectedTasks = formData.getAll("add-task");
       addSelectedTasks(passedList, allSelectedTasks);
       refreshListsAddTasks(passedList.id);
+      refreshListsRemovedTasks(passedList.id);
     }
     refreshListItems();
   });
