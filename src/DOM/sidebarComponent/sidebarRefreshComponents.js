@@ -113,7 +113,15 @@ function refreshListItems() {
   removeChildren(usersContainer);
   for (let i = 0; i < allListsCount; i++) {
     checkListItems(allLists[i].id);
-    listButtons[i].textContent = `${allLists[i].Name} - ${listLength}`;
+    listButtons[i].textContent = "";
+    listButtons[i].classList.add("list-btn");
+    const nameSpan = document.createElement("span");
+    nameSpan.classList.add("list-name-span");
+    nameSpan.textContent = allLists[i].Name;
+    const countSpan = document.createElement("span");
+    countSpan.classList.add("list-count-span");
+    countSpan.textContent = ` - ${listLength}`;
+    listButtons[i].append(nameSpan, countSpan);
     listButtons[i].addEventListener("click", () => {
       renderMainListsDetails(allLists[i].id);
     });

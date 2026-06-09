@@ -167,9 +167,8 @@ dialog {
   flex-direction: column;
   border: var(--border);
   width: var(--full);
+  max-width: 200px;
   overflow-x: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   padding: 0.2rem;
   max-height: 100px;
   overflow-y: scroll;
@@ -177,6 +176,14 @@ dialog {
 .dialogs-list > div {
   display: flex;
   gap: 0.5rem;
+  align-items: center;
+}
+.dialogs-list label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 2px 0;
+  line-height: 1.2;
 }
 
 main {
@@ -200,14 +207,10 @@ main {
   gap: 0.5rem;
 }
 
-#options-form #list-items,
 #list-options form {
   max-width: 400px;
   height: fit-content;
   max-height: 450px;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 #list-details > div {
@@ -237,11 +240,15 @@ main {
 }
 
 #task-dialog {
-  max-width: 200px;
   overflow-x: hidden;
   height: fit-content;
   max-width: 600px;
   min-width: 200px;
+}
+#task-dialog h3 {
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
 }
 #task-dialog p {
   text-wrap: wrap;

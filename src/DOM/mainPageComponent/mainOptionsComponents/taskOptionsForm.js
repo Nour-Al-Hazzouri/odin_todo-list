@@ -1,6 +1,7 @@
 import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
 import { syncTaskObjects } from "../../../objectsComponents/centralObjectsStorage.js";
 import elementsCreate from "../../elementsCreator.js";
+import removeMainSections from "../../removeMainSections.js";
 import { setLabelAttributes } from "../../toggleAttribute.js";
 
 let passedTask;
@@ -79,6 +80,7 @@ function activateEventListener(taskForm) {
     passedTask.setPriority = transformedForm.priority;
     passedTask.setNotes = transformedForm.notes;
     syncTaskObjects();
+    removeMainSections();
   });
 }
 
