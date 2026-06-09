@@ -245,11 +245,9 @@ main {
   max-width: 600px;
   min-width: 200px;
 }
-#task-dialog h3 {
+#task-dialog h3,
+#task-dialog p {
   overflow-wrap: break-word;
   white-space: normal;
   max-width: 100%;
-}
-#task-dialog p {
-  text-wrap: wrap;
 }
