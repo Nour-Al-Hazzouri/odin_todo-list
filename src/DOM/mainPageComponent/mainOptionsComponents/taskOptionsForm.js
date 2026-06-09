@@ -1,4 +1,5 @@
 import checkReturnedObject from "../../../checkers/checkReturnedObject.js";
+import { syncTaskObjects } from "../../../objectsComponents/centralObjectsStorage.js";
 import elementsCreate from "../../elementsCreator.js";
 import { setLabelAttributes } from "../../toggleAttribute.js";
 
@@ -6,6 +7,7 @@ let passedTask;
 
 function createTaskOptionsForm(id) {
   const taskForm = document.createElement("form");
+  taskForm.id = "options-form";
   const taskLabel = elementsCreate("label", 5);
   const taskInput = elementsCreate("input", 4);
   const taskSelect = document.createElement("select");
@@ -16,7 +18,7 @@ function createTaskOptionsForm(id) {
   setLabelAttributes(taskLabel[0], "Title", "task-title");
   setLabelAttributes(taskLabel[1], "Description", "task-description");
   setLabelAttributes(taskLabel[2], "Due Date", "task-duedate");
-  setLabelAttributes(taskLabel[3], "Priority", "task-priority");
+  setLabelAttributes(taskLabel[3], "Priority", "priority");
   setLabelAttributes(taskLabel[4], "Notes", "task-notes");
 
   taskInput[0].value = `${passedTask.Title}`;
@@ -71,12 +73,12 @@ function activateEventListener(taskForm) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const transformedForm = Object.fromEntries(formData);
-    console.log(passedTask);
     passedTask.setTitle = transformedForm.title;
     passedTask.setDescription = transformedForm.description;
     passedTask.setDueDate = transformedForm.duedate;
     passedTask.setPriority = transformedForm.priority;
     passedTask.setNotes = transformedForm.notes;
+    syncTaskObjects();
   });
 }
 

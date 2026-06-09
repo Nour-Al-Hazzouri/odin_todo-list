@@ -200,7 +200,8 @@ main {
   gap: 0.5rem;
 }
 
-#options-form #list-items {
+#options-form #list-items,
+#list-options form {
   max-width: 400px;
   height: fit-content;
   max-height: 450px;

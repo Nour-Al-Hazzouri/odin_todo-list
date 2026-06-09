@@ -85,6 +85,19 @@ I created a new module to handle fetching task items (similar to the one we just
 - **Logic Changes**: Replaced occurrences of `const listItems = getListObjects()` and `const taskItems = getTaskObjects()` with the encapsulated methods `getAllLists()` and `getAllTasks()`. Also replaced direct `list.Items` fetching and length checks with `checkListItems(id)` and extracted an empty message. Refactored local variables (`listItems`, `taskItems`, `listItemsCount`, etc.) to point to the live module bindings (`allLists`, `allTaskItems`, `allListsCount`, `taskItemsCount`) exposed by the checker modules.
 - **Why**: To completely centralize list and task retrieval, maintaining a single source of truth and enforcing the newly established pattern across the entire platform.
 
+I performed a platform-wide sweep based on `MODULES.md` and updated all remaining files that were still using the old method for fetching lists and tasks. They now securely route through the newly created checker modules, unifying data access patterns across your application.
+
+## Request #5 - 2026-06-09
+
+**Technical Summary**: Added an "Edit" button to the task details dialog to trigger task options rendering.
+
+### Technical Log
+
+- **Modified Files**:
+  - `src/DOM/mainPageComponent/mainDetailsComponents/tasksDetailsDialogs.js`
+- **Logic Changes**: Imported `renderTaskOptions` from `mainOptionsPage.js`. Created an "Edit" button element inside the task details dialog. Attached a click event listener to close the dialog and execute `renderTaskOptions(task.id)`. Appended the button to the dialog's DOM hierarchy alongside the close button.
+- **Why**: To expose the pre-existing task editing logic (`taskOptionsForm`) to the user interface, completing the CRUD cycle for tasks through the details modal.
+
 ### Plain English Summary
 
-I performed a platform-wide sweep based on `MODULES.md` and updated all remaining files that were still using the old method for fetching lists and tasks. They now securely route through the newly created checker modules, unifying data access patterns across your application.
+I added an "Edit" button to the task details popup. When clicked, it closes the popup and takes you directly to the task's options page, allowing you to edit the task using the existing form logic that was previously inaccessible from the UI.
